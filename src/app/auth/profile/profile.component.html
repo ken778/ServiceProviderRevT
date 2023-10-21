@@ -1,0 +1,76 @@
+<app-header [Heading]="'Profile'"></app-header>
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center ">
+      <div class="col col-md-6 mt-md-5 pt-md-5">
+        <ion-item class="profile-banner ion-text-center">
+          <ion-text class="text-light">Kenneth chuenyana</ion-text>
+        </ion-item>
+        <div class="avatar justify-content-center">
+          <ion-avatar>
+            <img [src]="imageSource" />
+          </ion-avatar>
+          <ion-icon (click)="takePicture()" name="camera"></ion-icon>
+        </div>
+
+        <div class="farmName">
+          <ion-text class="p-3"
+            ><ion-icon name="storefront-outline"></ion-icon> Farm
+            Store</ion-text
+          >
+        </div>
+        <div class="cards">
+          <ion-item class="card m-2">
+            <ion-list>
+              <ion-label>Contact Details</ion-label>
+              <ion-text>0769524833</ion-text><br />
+              <ion-text>kennethtumi18@gmail.com</ion-text>
+            </ion-list>
+            <ion-button slot="end" (click)="editContacts()"> EDIT </ion-button>
+          </ion-item>
+          <ion-item class="card m-2">
+            <ion-list>
+              <ion-label>Operation</ion-label>
+              <ion-text>Weekdays:</ion-text><br />
+              <ion-text>Saturday:</ion-text><br />
+              <ion-text>Sunday:</ion-text>
+            </ion-list>
+            <ion-button
+              slot="end"
+              id="open-modal"
+              (click)="editOperationHours()"
+            >
+              EDIT
+            </ion-button>
+          </ion-item>
+          <ion-item class="card m-2">
+            <ion-list>
+              <ion-label>Store Address</ion-label>
+              <ion-text>0769524833</ion-text><br />
+              <ion-text>kennethtumi18@gmail.com</ion-text>
+            </ion-list>
+            <!-- <ion-button
+              slot="end"
+              id="open-modal"
+              (click)="editOperationHours()"
+            >
+              EDIT
+            </ion-button> -->
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modals -->
+  <!-- <app-modal  trigger="open-modal"> -->
+  <!-- <app-edit-contact-details ></app-edit-contact-details> -->
+  <!-- <p  *ngIf="edit_screen ==='operation-hours'">operations</p>
+  <p *ngIf="edit_screen ==='contact-details'">con</p>
+
+  <p  *ngIf="edit_screen ==='store-address'">Address</p> -->
+  <!-- <p>opened</p> -->
+  <!-- <app-edit-operation-hours ></app-edit-operation-hours>
+  <app-edit-store-address ></app-edit-store-address> -->
+  <!-- </app-modal> -->
+</ion-content>

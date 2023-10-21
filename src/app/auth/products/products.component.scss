@@ -1,0 +1,75 @@
+:host{
+    .Product-details-container{
+       ion-text{
+        font-size: 0.8rem;
+        font-weight: bolder;
+       }
+    }
+    .productContainer{
+       border:1px solid #16924a;
+        ion-avatar{
+            img{
+                width:3rem;
+                height:3rem
+            }
+            margin-left: 0.5rem;
+        }
+    }
+    .table-header,.table-row{
+       ion-col{
+        font-size: 0.5rem;
+       }
+      
+    }
+    ion-row{
+      border:none
+       }
+    .table-header {
+        font-weight: bolder;
+        border-bottom: 1px solid #ccc;
+        color: grey;
+      }
+      
+      .table-row {
+        border-bottom: 1px solid #ddd;
+      }
+      
+      ion-col {
+        padding: 4px;
+      }
+      ion-fab{
+        ion-fab-button{
+            --background: #16924a;
+        }
+       
+      }
+    .inputContainer{
+      padding: 6%;
+      margin-bottom: 10px;
+    }
+    .custom-select::part(icon) {
+      color: #272360 !important;
+    }
+    .dropdownInput.item{
+      
+      border: 1px solid red;
+    }
+    a{
+     text-decoration: none !important;
+     color: black;
+    }
+    .image-container{
+      ion-avatar {
+          --border-radius: 4px;
+          height: 200px;
+          width: 200px;
+        }
+        border: 1px solid #16924a;
+        .camera-icon{
+
+          color: #16924a;
+        }
+  }
+ 
+    
+}

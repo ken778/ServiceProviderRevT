@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="no-background ">
+    <ion-item *ngIf="hideBackButton" class="text-center" lines="none">
+      <div class="centerText">
+        <ion-text class="noButtonHeader">{{ Heading }}</ion-text>
+      </div>
+      
+    </ion-item>
+    
+    <ion-item *ngIf="!hideBackButton" lines="none">
+      <div class="inner-container">
+        <button (click)="back()" class="d-inline-block" style="background: none">
+          <ion-icon
+            name="arrow-back-outline"
+          ></ion-icon>
+        </button>
+        <ion-text slot="end">{{Heading}}</ion-text>
+      </div>
+      
+    </ion-item>
+  </ion-toolbar>
+</ion-header>

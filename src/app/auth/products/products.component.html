@@ -1,0 +1,128 @@
+<app-header [Heading]="'Products'"></app-header>
+<ion-content>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+       
+        <div *ngFor="let item of products$ | async " class="mt-3 productContainer">
+          <a [routerLink]="['/productDetails', item.id]"> 
+        
+          <div class="row">
+            <div class="col col-2">
+              <ion-avatar class="mt-2" slot="start">
+                <img
+                  alt="Silhouette of a person's head"
+                  src="https://static.vecteezy.com/system/resources/previews/005/539/606/original/3d-realistic-transparent-isolated-set-whole-and-slice-of-watermelon-watermelon-in-a-splash-of-juice-with-drops-free-vector.jpg"
+                />
+              </ion-avatar>
+            </div>
+            <div class="col Product-details-container">
+              <ion-text>{{item.productName}}</ion-text>
+              <ion-grid>
+                <!-- Header row -->
+                <ion-row class="table-header">
+                  <ion-col>Sold out</ion-col>
+                  <ion-col>In stock</ion-col>
+                  <ion-col>Quantity</ion-col>
+                </ion-row>
+
+                <!-- Data rows -->
+                <ion-row class="table-row">
+                  <ion-col>{{item.soldOut}}</ion-col>
+                  <ion-col>{{item.soldOut}}</ion-col>
+                  <ion-col>{{item.quantity}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </div>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ion-modal
+    [ngStyle]="modalStyle"
+    trigger="open-modal"
+    [initialBreakpoint]="1"
+    [breakpoints]="[0, 1]"
+  >
+    <ng-template>
+      <div class="block p-3">
+        <app-dropdown-input
+          [label]="'Category'"
+   
+        >
+
+        </app-dropdown-input>
+       
+      
+      
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <div class="addButton pt-2">
+            <app-button [class]="'w-100%'" [title]="'ADD'">
+
+            </app-button> 
+          </div>
+        
+      </div>
+    </ng-template>
+  </ion-modal> -->
+     <!-- modal -->
+     <app-modal trigger="open-modal">
+      <div class="block p-3">
+        <div [ngStyle]="imagecontainer" class="image-container  m-1 p-2">
+          <ion-avatar [ngStyle]="avatarStyle" class="m-auto">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-icon class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
+        </div>
+        <app-dropdown-input
+          [label]="'Category'"
+   
+        >
+        </app-dropdown-input>
+       
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <app-input
+          [placeholder]="'Product name'"
+          >
+
+          </app-input>
+          <div class="addButton pt-2">
+            <app-button [class]="'w-100%'" [title]="'ADD'">
+
+            </app-button> 
+          </div>
+        
+      </div>
+    </app-modal>
+</ion-content>
+<ion-fab id="open-modal" slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+

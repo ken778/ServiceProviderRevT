@@ -1,0 +1,86 @@
+<app-header [Heading]="'Dashboard'"></app-header>
+<ion-content>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="row row-col-sm-3">
+          <div class="col">
+            <div
+              class="card mt-5 p-3 text-center justify-content-center"
+              style="width: auto; height: auto"
+            >
+              <div class="icon">
+                <ion-icon name="time-outline"></ion-icon>
+              </div>
+              <ion-text>{{totaPending}}</ion-text>
+              <ion-text>Total Pending</ion-text>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="card mt-5 p-3 text-center justify-content-center"
+              style="width: auto; height: auto"
+            >
+              <div class="icon">
+                <ion-icon name="receipt-outline"></ion-icon>
+              </div>
+              <ion-text>{{orders.length}}</ion-text>
+              <ion-text>Total Orders</ion-text>
+            </div>
+          </div>
+          <div class="col">
+            <div
+              class="card mt-5 p-3 text-center justify-content-center"
+              style="width: auto; height: auto"
+            >
+              <div class="icon">
+                <ion-icon name="car-outline"></ion-icon>
+              </div>
+              <ion-text>{{totalDispatched}}</ion-text>
+              <ion-text>Total Dispach</ion-text>
+            </div>
+          </div>
+        </div>
+        <div class="tabs non-scrollable">
+          <ion-item lines="none">
+            <ion-text> Orders </ion-text>
+          </ion-item>
+          <div class="tabmenu">
+            <div class="tab d-flex justify-content-center">
+              <ion-text
+                (click)="selectTab(item)"
+                *ngFor="let item of tabs$ | async"
+                [ngStyle]="{
+                  'border-bottom':
+                    item === activeTab
+                      ? '4px solid #16924a'
+                      : '1px solid #ffffff'
+                }"
+                >{{ item }}</ion-text
+              >
+            </div>
+          </div>
+        </div>
+        <div class="scrollable">
+          <ion-list>
+            <ion-item *ngFor="let item of filteredOrders$" class="order-details mx-auto mt-2" lines="none">
+              <div class="icon">
+                <ion-icon size="large" name="person-outline" slot="start"></ion-icon>
+              </div>
+              <div class="details">
+                <div class="names">
+                  <ion-text>{{item.name}}</ion-text>
+                </div>
+                <div class="inner-details">
+                  <ion-text>{{item.orderNumber}}</ion-text>
+                  <ion-text>{{item.quantity}}</ion-text>
+                  <ion-text>{{item.totalAmount}}</ion-text>
+                </div>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

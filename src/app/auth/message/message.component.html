@@ -1,0 +1,39 @@
+<app-header [Heading]="'Chats'"></app-header>
+<ion-content>
+    <div class="fluid">
+         <div class="row">
+              <div class="col">
+                    <ion-list>
+                           <ion-list-header class="ion-padding-bottom">
+                              RECENT CHATS
+                           </ion-list-header>
+                         
+                            <div class="div" *ngFor="let item of users$ | async">
+                              <a [routerLink]="['/chat', item.id]"> 
+                              <ion-item detail >
+                                  
+                                   <ion-avatar slot="start">
+                                          <img [src]="item.image"/>
+                                   </ion-avatar>
+                                   <ion-label>
+                                       {{item.name}}
+                                        <p>
+                                             <ion-text>    {{item.message}}</ion-text>
+                                        </p>
+                                   </ion-label>
+                                   <ion-text slot="end" color="medium">10:00 AM</ion-text>
+                           
+                               </ion-item>
+                              </a>
+                            </div>
+                       
+                             
+                       
+                         
+                    </ion-list>
+              </div>
+         </div>
+    </div>
+
+
+</ion-content>

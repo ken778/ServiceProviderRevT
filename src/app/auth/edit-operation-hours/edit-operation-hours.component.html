@@ -1,0 +1,141 @@
+<app-header [Heading]="'Opertation Hours'"></app-header>
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center">
+      <div class="col col-md-6 mt-md-5">
+        <div class="form-container mt-5">
+          <h2 class="text-center">
+            <ion-text> Operation Hours </ion-text>
+          </h2>
+          <div class="weekdays-container mt-2">
+            <h3><ion-text class="p-3">Weekdays</ion-text></h3>
+
+            <ion-item>
+              <ion-datetime-button
+                
+                slot="start"
+                datetime="datetime1"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="weekdayStart($event)"
+                    id="datetime1"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+              <ion-text style="margin: auto"> to </ion-text>
+              <ion-datetime-button
+                slot="end"
+                datetime="datetime2"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="weekdayEnd($event)"
+                    id="datetime2"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+          </div>
+          <div class="Saturday-container mt-2">
+            <h3><ion-text class="p-3">Saturday</ion-text></h3>
+
+            <ion-item>
+              <ion-datetime-button
+                slot="start"
+                datetime="datetime3"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="saturdayStart($event)"
+                    id="datetime3"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+              <ion-text style="margin: auto"> to </ion-text>
+              <ion-datetime-button
+                slot="end"
+                datetime="datetime"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="saturdayEnd($event)"
+                    id="datetime"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+          </div>
+          <div class="Sunday-container mt-2">
+            <h3><ion-text class="p-3">Sunday</ion-text></h3>
+
+            <ion-item>
+              <ion-datetime-button
+                slot="start"
+                datetime="datetime"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="sundayStart($event)"
+                    id="datetime"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+              <ion-text style="margin: auto"> to </ion-text>
+              <ion-datetime-button
+                slot="end"
+                datetime="datetime"
+                display-format="h:mm A"
+              ></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                  [showDefaultButtons]="true"
+                  (ionChange)="sundayEnd($event)"
+                    id="datetime"
+                    display-format="h:mm A"
+                    presentation="time"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+          </div>
+
+          <div  class="addButton pt-2">
+            <app-button  [class]="'w-100%'" [title]="'UPDATE'"> </app-button>
+          </div>
+          <ion-button (click)="update()" expand="block">
+                update
+          </ion-button>
+   
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

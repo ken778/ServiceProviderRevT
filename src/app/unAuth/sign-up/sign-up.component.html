@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center ">
+      
+      <div class="col mt-5 p-3 col-sm-12 col-md-6 col-lg-5 mt-md-5 pt-md-4">
+        <div class="logo pt-5 mt-1">
+          <h1 class="text-center">LOGO</h1>
+        </div>
+        <div class="heading text-center text-muted">
+          <ion-text>
+            <h3>Service Provider Acoount Details</h3>
+          </ion-text>
+          <ion-text> Please enter all required fields to register </ion-text>
+        </div>
+        <app-input
+           [iconName]="'person-outline'"
+          [placeholder]="'First Name'"
+          [control]="formGroup.controls.firstName"
+        ></app-input>
+        <app-input
+        [iconName]="'person-outline'"
+          [placeholder]="'Last Name'"
+          [control]="formGroup.controls.lastName"
+        ></app-input>
+        <app-input
+        [iconName]="'call-outline'"
+          [placeholder]="'Phone Name'"
+          [control]="formGroup.controls.phoneNumber"
+        ></app-input>
+        <app-input
+        [iconName]="'mail-outline'"
+          [placeholder]="'Email'"
+          [control]="formGroup.controls.email"
+        ></app-input>
+        <app-input
+        [iconName]="'location-outline'"
+          [placeholder]="'City'"
+          [control]="formGroup.controls.city"
+        ></app-input>
+        <div class="button mt-4">
+          <app-button (click)="signIn()"  [title]="'LOGIN'"></app-button>
+        </div>
+        <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
+            <ion-text>
+                <h6>
+                   Already have an account? <ion-text class="text-success"><a [routerLink]="['/sign-in']">Sign in</a></ion-text>
+                </h6>
+            </ion-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+

@@ -1,0 +1,1 @@
+export const Category = ["Vergies", "Fruits","Meat", "Live Stock", "Canned Vergies"]

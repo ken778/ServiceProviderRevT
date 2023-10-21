@@ -1,0 +1,47 @@
+<app-header [Heading]="'Contact Details'"></app-header>
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center">
+      <div class="col  col-md-6 mt-md-5 ">
+          <div class="form-container mt-5">
+             <h2 class="text-center">
+                 <ion-text >
+                       Contatact Deatails
+                 </ion-text>
+             </h2>
+            <app-input
+            [placeholder]="'Store Name'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'Email Address'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'Office Number'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'Office Alternative Number'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'Store Description'"
+            >
+  
+            </app-input>
+            <app-text-area></app-text-area>
+            <div class="addButton pt-2">
+                <app-button [class]="'w-100%'" [title]="'UPDATE'">
+    
+                </app-button> 
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

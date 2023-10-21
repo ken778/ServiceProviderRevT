@@ -1,0 +1,22 @@
+:host{
+    .line{
+        height: 4px;
+        width: 20%;
+        background-color: #16924a;
+        margin-top: -18px;
+        margin-left: 18px;
+    }
+    ion-label{
+        ion-list{
+            p{
+              font-size: 0.8rem;
+              opacity: 70%;
+            }
+           
+          }
+          .month-text{
+            font-weight: bolder;
+        }
+    }       
+  
+}

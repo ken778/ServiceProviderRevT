@@ -1,0 +1,69 @@
+<app-header [Heading]="'Reports'"></app-header>
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row">
+          <ion-datetime
+            presentation="month-year"
+            [showDefaultButtons]="true"
+            (ionChange)="getreport($event)"
+          ></ion-datetime>
+        </div>
+      </div>
+      <div class="report-heading">
+        <h3 class="p-3 mt-2">
+          <ion-text> Monthly Business Report </ion-text>
+        </h3>
+        <div class="line"></div>
+        <div class="report-container">
+          <ion-item  >
+            <ion-label>
+              <ion-text class="month-text"> January </ion-text>
+              <ion-list>
+                <p>
+                  <ion-text> Amount: R100</ion-text>
+                </p>
+              </ion-list>
+              <ion-list>
+                <p>
+                  <ion-text> Total Orders: 100</ion-text>
+                </p>
+              </ion-list>
+            </ion-label>
+            <!-- <ion-text  color="medium">10:00 AM</ion-text> -->
+            <ion-icon (click)="createAndDownload()" slot="end" name="download-outline"></ion-icon>
+          </ion-item>
+        </div>
+      </div>
+      <!-- <div class="testing-report">
+            <form (ngSubmit)="createAndDownload()" [formGroup]="myForm">
+              <ion-item>
+                   <ion-label>Include logo image?</ion-label>
+                   <ion-checkbox formControlName="showLogo" slot="start"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">From</ion-label>
+                <ion-input formControlName="from"></ion-input>
+              </ion-item>
+               
+              <ion-item>
+                <ion-label position="stacked">To</ion-label>
+                <ion-input formControlName="from"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Text</ion-label>
+                <ion-textarea formControlName="text" rows="3"></ion-textarea>
+              </ion-item>
+              <ion-button expand="full" type="submit">
+                   Create Pdf
+              </ion-button>
+           
+               
+
+            </form>
+           
+      </div> -->
+    </div>
+  </div>
+</ion-content>

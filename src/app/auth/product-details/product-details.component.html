@@ -1,0 +1,49 @@
+<app-header [Heading]="'Update Product'"></app-header>
+<ion-content>
+  <div class="fluid">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="row">
+         
+           <div class="form-container">
+            <div class="image-container  m-1 p-2">
+              <ion-avatar class="m-auto">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-icon class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
+            </div>
+            <app-dropdown-input
+            [label]="'Category'"
+     
+          >
+          </app-dropdown-input>
+            <app-input
+            [placeholder]="'Product name'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'price'"
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'Quantity'"
+            >
+  
+            </app-input>
+            <app-text-area
+            >
+  
+            </app-text-area>
+            <div class="addButton pt-2">
+              <app-button [class]="'w-100%'" [title]="'UPDATE'">
+  
+              </app-button> 
+            </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
