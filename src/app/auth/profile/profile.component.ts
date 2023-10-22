@@ -8,6 +8,7 @@ import { EditStoreAddressComponent } from '../edit-store-address/edit-store-addr
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,9 +21,20 @@ export class ProfileComponent  implements OnInit {
 
   edit_screen!: String;
   imageSource!:any;
-  constructor(private _route: Router) { }
+  userInfo!: any
+  constructor(private _route: Router,private _auth: AuthServiceService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //get looged in user id
+  //  this._auth.loggedInUser().subscribe({
+  //   next: (data) => {console.log('id',data?.uid)},
+  //   error: (error) => {console.log(error)},
+  //  })
+  this.getUserId()
+  
+  }
+
+
 
   editContacts(){
      this.edit_screen = 'contact-details'
@@ -52,6 +64,34 @@ export class ProfileComponent  implements OnInit {
     this.imageSource = image.dataUrl;
     console.log(this.imageSource)
     console.log('helo')
+  }
+
+
+  //get user details
+  getUserId(){
+        //get looged in user id
+   this._auth.loggedInUser().subscribe({
+    next: (data) => {
+      console.log('id',data?.uid)
+      this.getUserDetail(data?.uid)
+    },
+    error: (error) => {console.log(error)},
+   })
+  }
+
+  //fetch user
+  getUserDetail(uid:any){
+    this._auth.getUser(uid).subscribe({
+      next: (snapshot) => {
+          console.log(snapshot)
+          this.userInfo = snapshot
+          console.log('data', this.userInfo)
+          
+      },
+      error: (error) => {
+        console.log(error);
+      }
+     })
   }
 
 }

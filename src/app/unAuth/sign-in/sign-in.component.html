@@ -15,11 +15,16 @@
         </div>
         <app-input
           [iconName]="'call-outline'"
-          [placeholder]="'Phone Name'"
-          [control]="formGroup.controls.phoneNumber"
+          [placeholder]="'email'"
+          [control]="formGroup.controls.email"
+        ></app-input>
+        <app-input
+          [iconName]="'call-outline'"
+          [placeholder]="'Password'"
+          [control]="formGroup.controls.password"
         ></app-input>
         <div class="button mt-4">
-          <app-button [title]="'REGISTER'"></app-button>
+          <app-button (click)="login()" [title]="'LOGIN'"></app-button>
         </div>
         <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
           <ion-text>

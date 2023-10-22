@@ -3,6 +3,7 @@ import { Component, OnInit, Pipe } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { from, map, of, pipe } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -110,7 +111,7 @@ export class DashboardComponent implements OnInit {
   oders$ = of(this.orders);
   filteredOrders$: any = [];
 
-  constructor() {}
+  constructor(private _auth: AuthServiceService) {}
 
   ngOnInit() {
     this.totalDispatched =  this.accumulateOrders('Dispatched');
@@ -128,6 +129,9 @@ export class DashboardComponent implements OnInit {
         console.log(data);
       },
     });
+
+  
+
   }
 
   //seceted tab

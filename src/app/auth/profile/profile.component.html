@@ -4,7 +4,7 @@
     <div class="row justify-content-center ">
       <div class="col col-md-6 mt-md-5 pt-md-5">
         <ion-item class="profile-banner ion-text-center">
-          <ion-text class="text-light">Kenneth chuenyana</ion-text>
+          <ion-text class="text-light" *ngIf="userInfo">{{userInfo.first_name}} {{userInfo.last_name}}</ion-text>
         </ion-item>
         <div class="avatar justify-content-center">
           <ion-avatar>
@@ -23,8 +23,8 @@
           <ion-item class="card m-2">
             <ion-list>
               <ion-label>Contact Details</ion-label>
-              <ion-text>0769524833</ion-text><br />
-              <ion-text>kennethtumi18@gmail.com</ion-text>
+              <ion-text>{{userInfo.phone_number }}</ion-text><br />
+              <ion-text>{{userInfo.email_address}}</ion-text>
             </ion-list>
             <ion-button slot="end" (click)="editContacts()"> EDIT </ion-button>
           </ion-item>
