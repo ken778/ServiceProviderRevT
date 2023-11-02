@@ -28,8 +28,6 @@
   </ion-item> -->
   <ion-item>
     <ion-icon
- 
-      
       [name]="iconName"
       slot="start"
     ></ion-icon>
@@ -39,10 +37,10 @@
        [label]="label"
       interface="Categorry"
       placeholder="Select One"
+      [formControl]="control"
+      (ionChange)="valueChanged()"
     >
-      <ion-select-option value="brown">Brown</ion-select-option>
-      <ion-select-option value="blonde">Blonde</ion-select-option>
-      <ion-select-option value="red">Red</ion-select-option>
+    <ion-select-option *ngFor="let option of options" [value]="option">{{ option }}</ion-select-option>
     </ion-select>
   </ion-item>
 </div>

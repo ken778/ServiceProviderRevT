@@ -9,39 +9,56 @@
                       Store Address
                  </ion-text> 
              </h2>
+             <div class="addButton pt-2">
+              <app-button [class]="'w-100%'" (click)="autoPopulate()" [title]="'use current address'">
+             
+              </app-button> 
+            </div>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'Street'"
+            [control]="formGroup.controls.street"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'sub region Line 1'"
+            [control]="formGroup.controls.subRegion"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'City'"
+            [control]="formGroup.controls.city"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'Region/State/Province'"
+            [control]="formGroup.controls.region"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'Postal Code'"
+            [control]="formGroup.controls.PostalCode"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Product name'"
+            [iconName]="'location-outline'"
+            [placeholder]="'Address Line 2'"
+            [control]="formGroup.controls.AddressLine2"
             >
   
             </app-input>
             <div class="addButton pt-2">
-                <app-button [class]="'w-100%'" [title]="'UPDATE'">
-    
+                <app-button [class]="'w-100%'" (click)="updatedetails()" [title]="'UPDATE'">
+               
                 </app-button> 
               </div>
           </div>

@@ -3,14 +3,18 @@ import { Database, set, ref, update, onValue } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { registerModule } from 'src/app/shared/models/interfaces/user/user.iterface';
+import { registerModule, storeAddressModule } from 'src/app/shared/models/interfaces/user/user.iterface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
   auth = getAuth();
+  //register class module
   public registerEmailInstance = new registerModule();
+
+  //store address class module
+  public storeAdressIntance = new storeAddressModule()
 
   //variables
   isActive = false
@@ -83,6 +87,33 @@ export class AuthServiceService {
     });
   }
 
+  //get store opertaing hours 
+  getStoreHours(uid:any): Observable<any> {
+    const startCountRef = ref(this.database, 'storeOperationHours/' + uid);
+    return new Observable((observer) => {
+      const unsubscribe = onValue(startCountRef, (snapshot) => {
+        const data = snapshot.val();
+        observer.next(data);
+      });
+      return () => {
+        unsubscribe();
+      };
+    });
+  }
+  
+  //get store adress
+  getStoreAddress(uid:any): Observable<any> {
+    const startCountRef = ref(this.database, 'storeAddress/' + uid);
+    return new Observable((observer) => {
+      const unsubscribe = onValue(startCountRef, (snapshot) => {
+        const data = snapshot.val();
+        observer.next(data);
+      });
+      return () => {
+        unsubscribe();
+      };
+    });
+  }
   
 
   //get users
@@ -99,5 +130,36 @@ export class AuthServiceService {
     });
   }
 
+  //add store address
+  addStoreAddressData(id:any,data:any) {
+   let addressObj = {
+     ...data,
+     uid:id
+   }
+    return set(ref(this.database, 'storeAddress/' + id ), addressObj)
+  }
+  displaydata(){
+    console.log('from auth service',this.storeAdressIntance)
+  }
+
+  //add store data
+  addStoreDetails(id:any, data:any){
+  
+         return set(ref(this.database, 'stores/' + id), data)
+  }
+  //add operrations hours 
+  addOperationsHours(id:any, data:any){
+      return set(ref(this.database, 'storeOperationHours/' + id), data)
+  }
+
+  //logout 
+logoutUser(){
+  return this.auth.signOut()
+}
+
+//get all users
+getAllUsers(){
+   
+}
 
 }

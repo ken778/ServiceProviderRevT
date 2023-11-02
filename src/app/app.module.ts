@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import {HttpClientModule} from '@angular/common/http';
 import {FileOpener} from '@ionic-native/file-opener/ngx'
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 
@@ -18,6 +19,10 @@ import { environment } from 'src/environments/environment.prod';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 
+import {Storage, getDownloadURL, ref, uploadBytes} from '@angular/fire/storage'
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+import { provideStorage,getStorage } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,
@@ -26,10 +31,12 @@ import { AngularFireModule } from '@angular/fire/compat';
     AngularFireAuthModule,
     provideDatabase(()=>getDatabase()),
     AngularFireAuthModule,
+    provideStorage(() => getStorage()),
+    
    
 
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },FileOpener,AngularFireAuth],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },FileOpener,AngularFireAuth, Geolocation,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

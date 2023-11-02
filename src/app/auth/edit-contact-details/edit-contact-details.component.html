@@ -9,35 +9,51 @@
                        Contatact Deatails
                  </ion-text>
              </h2>
+             <div [ngStyle]="imagecontainer" class="image-container  m-1 p-2">
+              <ion-avatar [ngStyle]="avatarStyle" class="m-auto">
+                <img *ngIf="!imageUrl" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <img *ngIf="imageUrl" alt="Silhouette of a person's head" [src]="imageUrl" />
+              </ion-avatar>
+              <ion-icon (click)="takePicture()" class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
+            </div>
             <app-input
             [placeholder]="'Store Name'"
+            [control]="formGroup.controls.store_name"
+            [iconName]="'storefront-outline'"
             >
   
             </app-input>
             <app-input
             [placeholder]="'Email Address'"
+            [iconName]="'mail-outline'"
+            [control]="formGroup.controls.email_address"
+            
             >
   
             </app-input>
             <app-input
             [placeholder]="'Office Number'"
+            [iconName]="'call-outline'"
+            [control]="formGroup.controls.office_no_1"
             >
   
             </app-input>
             <app-input
             [placeholder]="'Office Alternative Number'"
+            [iconName]="'call-outline'"
+            [control]="formGroup.controls.office_no_2"
+
             >
   
             </app-input>
-            <app-input
-            [placeholder]="'Store Description'"
-            >
-  
-            </app-input>
-            <app-text-area></app-text-area>
+       
+            <app-text-area 
+            [placeholder]="'Description'"
+            [control]="formGroup.controls.desc"
+            ></app-text-area>
             <div class="addButton pt-2">
-                <app-button [class]="'w-100%'" [title]="'UPDATE'">
-    
+                <app-button [class]="'w-100%'" (click)="updateDetails()" [title]="'UPDATE'">
+            
                 </app-button> 
               </div>
           </div>

@@ -6,6 +6,8 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { InputComponent } from 'src/app/shared/components/input/input.component';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
+import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
   selector: 'app-edit-operation-hours',
@@ -24,51 +26,92 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 })
 export class EditOperationHoursComponent implements OnInit {
   //time variables
-  weekdayStartTime: string = '';
-  weekdayEndTime: string = '';
+  weekdayStartTime!: string;
+  weekdayEndTime!: string;
 
-  saturdayStartTime: string = '';
-  saturdayEndTime: string = '';
+  saturdayStartTime!: string;
+  saturdayEndTime!: string;
 
-  sundayStartTime: string = '';
-  sundayEndTime: string = '';
+  sundayStartTime!: string;
+  sundayEndTime!: string;
+  ownerId!: any;
 
-  operationHours = [{weekdaysStartTime: '10:00', weekdaysEndTime: '12:00'}, {saturdaysStartTime: '9:00', saturdaysEndTime: '1:00'}, {sundaysStartTime: '8:00', sundaysEndTime: '12:00'}]
 
-  constructor() {}
- 
-  operationHours$ = of(this.operationHours)
+
+  constructor(private _auth:AuthServiceService, private _toast: ToastService) {
+    this.getUserId()
+  }
+
+  // operationHours$ = of(this.operationHours);
+
+  //function to format time
+  formatTime(time: any) {
+    var date = new Date(time);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var timeString = `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}`;
+    return timeString;
+  }
 
   ngOnInit() {}
 
+  //get user id
+  getUserId() {
+    this._auth.loggedInUser().subscribe((res) => {
+      this.ownerId = res?.uid;
+    });
+  }
+
   weekdayStart(event: any) {
-    console.log(event.target.value);
-    console.log('hello i have changed');
-    this.weekdayStartTime = event.target.value;
+    console.log(new Date(event.target.value));
+    this.weekdayStartTime = this.formatTime(event.target.value);
+    console.log('hello i have changed', this.weekdayStartTime);
   }
   weekdayEnd(event: any) {
     console.log('weekdaysEndTime', event.target.value);
-    this.weekdayEndTime = event.target.value;
-    
+    this.weekdayEndTime = this.formatTime(event.target.value);
   }
   saturdayStart(event: any) {
     console.log('saturdayStartTime', event.target.value);
-    this.saturdayStartTime = event.target.value;
+    this.saturdayStartTime = this.formatTime(event.target.value);
   }
   saturdayEnd(event: any) {
     console.log('saturdayEndTime', event.target.value);
-    this.saturdayEndTime = event.target.value;
+    this.saturdayEndTime = this.formatTime(event.target.value);
   }
   sundayStart(event: any) {
-    console.log('sundayStartTime', event.target.value);
-    this.sundayStartTime = event.target.value;
+    console.log('sundayStart', event.target.value);
+    this.sundayStartTime = this.formatTime(event.target.value);
   }
   sundayEnd(event: any) {
-    console.log('sundayEndTime', event.target.value);
-    this.sundayEndTime = event.target.value;
+    this.sundayEndTime = this.formatTime(event.target.value);
+    console.log('sundayEnd' ,this.sundayEndTime);
   }
 
-  update(){
-          console.log(this.operationHours)
+  //store data into the database
+  storeOperationHours(id:any, data:any) {
+    this._auth.addOperationsHours(id,data,).then(()=>{
+      this._toast.presentToast('Operation hours updated successfully', 'success');
+    }).catch(()=>{
+      this._toast.presentToast('Operation hours not updated', 'danger');
+    })
+  }
+
+  update() {
+    console.log(this.weekdayStartTime);
+    const operationHours = {
+      weekdaysStartTime: this.weekdayStartTime,
+      weekdaysEndTime: this.weekdayEndTime,
+      saturdaysStartTime: this.saturdayStartTime,
+      saturdaysEndTime: this.saturdayEndTime,
+      sundaysStartTime: this.sundayStartTime,
+      sundaysEndTime: this.sundayEndTime,
+      ownerId: this.ownerId,
+    };
+
+    console.log(operationHours);
+    this.storeOperationHours(this.ownerId, operationHours)
   }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit, Pipe } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { from, map, of, pipe } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { authUser } from 'src/app/shared/models/interfaces/user/user.iterface';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 
 @Component({
@@ -161,6 +162,8 @@ export class DashboardComponent implements OnInit {
     const filtred = this.orders.filter((res) => res.status === status);
     return filtred.length
   }
+
+
   
   
 }

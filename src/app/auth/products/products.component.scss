@@ -71,5 +71,27 @@
         }
   }
  
+    ion-item {
+      border: 1px solid #16924a !important;
+      border-radius: 5px;
+      margin-top: 4%;
+      height: 40px;
+      ion-icon {
+        color: grey !important;
+        margin-top: -0.01rem;
+      }
+    }
+    ion-input {
+      font-size: 14px;
+      margin-top: -10px;
+    }
+    ion-select{
+        margin-top: -10px;
+        
+    }
+    ion-select::part(icon) {
+        color: #16924a !important;
+      }
+  
     
 }

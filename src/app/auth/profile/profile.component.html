@@ -8,7 +8,7 @@
         </ion-item>
         <div class="avatar justify-content-center">
           <ion-avatar>
-            <img [src]="imageSource" />
+            <img *ngIf="userInfo" [src]="userInfo.imageUrl" />
           </ion-avatar>
           <ion-icon (click)="takePicture()" name="camera"></ion-icon>
         </div>
@@ -23,17 +23,28 @@
           <ion-item class="card m-2">
             <ion-list>
               <ion-label>Contact Details</ion-label>
-              <ion-text>{{userInfo.phone_number }}</ion-text><br />
-              <ion-text>{{userInfo.email_address}}</ion-text>
+              <div *ngIf="userInfo" class="div">
+                <ion-text>{{userInfo.phone_number }}</ion-text><br />
+                <ion-text>{{userInfo.email_address}}</ion-text>
+              </div>
+            
             </ion-list>
             <ion-button slot="end" (click)="editContacts()"> EDIT </ion-button>
           </ion-item>
           <ion-item class="card m-2">
             <ion-list>
               <ion-label>Operation</ion-label>
-              <ion-text>Weekdays:</ion-text><br />
-              <ion-text>Saturday:</ion-text><br />
-              <ion-text>Sunday:</ion-text>
+              <div class="div" *ngIf="operatingHours">
+                <ion-text>Weekdays: {{operatingHours.weekdaysStartTime}} -  {{operatingHours.weekdaysEndTime}}</ion-text><br />
+                <ion-text>Saturday:  {{operatingHours.saturdaysStartTime}} -  {{operatingHours.saturdaysEndTime}}</ion-text><br />
+                <ion-text>Sunday: {{operatingHours.sundaysStartTime}} -  {{operatingHours.sundaysEndTime}}</ion-text>
+              </div>
+              <div class="div" *ngIf="!operatingHours">
+                <ion-text>Weekdays:</ion-text><br />
+                <ion-text>Saturday: </ion-text><br />
+                <ion-text>Sunday: </ion-text>
+              </div>
+             
             </ion-list>
             <ion-button
               slot="end"
@@ -46,17 +57,22 @@
           <ion-item class="card m-2">
             <ion-list>
               <ion-label>Store Address</ion-label>
-              <ion-text>0769524833</ion-text><br />
-              <ion-text>kennethtumi18@gmail.com</ion-text>
+          
+              <div class="div" *ngIf="storeAddress">
+                <ion-text>{{storeAddress.address}}</ion-text><br />
+              </div>
+            
             </ion-list>
-            <!-- <ion-button
+            <ion-button
               slot="end"
               id="open-modal"
-              (click)="editOperationHours()"
+              (click)="editStoreAddress()"
             >
               EDIT
-            </ion-button> -->
+            </ion-button>
+           
           </ion-item>
+          <button class="btn btn-primary" (click)="logout()">logout</button>
         </div>
       </div>
     </div>

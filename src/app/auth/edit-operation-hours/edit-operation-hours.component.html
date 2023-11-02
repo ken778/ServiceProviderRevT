@@ -70,7 +70,7 @@
               <ion-text style="margin: auto"> to </ion-text>
               <ion-datetime-button
                 slot="end"
-                datetime="datetime"
+                datetime="datetime4"
                 display-format="h:mm A"
               ></ion-datetime-button>
               <ion-modal [keepContentsMounted]="true">
@@ -78,7 +78,7 @@
                   <ion-datetime
                   [showDefaultButtons]="true"
                   (ionChange)="saturdayEnd($event)"
-                    id="datetime"
+                    id="datetime4"
                     display-format="h:mm A"
                     presentation="time"
                   ></ion-datetime>
@@ -92,7 +92,7 @@
             <ion-item>
               <ion-datetime-button
                 slot="start"
-                datetime="datetime"
+                datetime="datetime5"
                 display-format="h:mm A"
               ></ion-datetime-button>
               <ion-modal [keepContentsMounted]="true">
@@ -100,7 +100,7 @@
                   <ion-datetime
                   [showDefaultButtons]="true"
                   (ionChange)="sundayStart($event)"
-                    id="datetime"
+                    id="datetime5"
                     display-format="h:mm A"
                     presentation="time"
                   ></ion-datetime>
@@ -109,7 +109,7 @@
               <ion-text style="margin: auto"> to </ion-text>
               <ion-datetime-button
                 slot="end"
-                datetime="datetime"
+                datetime="datetime6"
                 display-format="h:mm A"
               ></ion-datetime-button>
               <ion-modal [keepContentsMounted]="true">
@@ -117,7 +117,7 @@
                   <ion-datetime
                   [showDefaultButtons]="true"
                   (ionChange)="sundayEnd($event)"
-                    id="datetime"
+                    id="datetime6"
                     display-format="h:mm A"
                     presentation="time"
                   ></ion-datetime>
@@ -127,11 +127,9 @@
           </div>
 
           <div  class="addButton pt-2">
-            <app-button  [class]="'w-100%'" [title]="'UPDATE'"> </app-button>
+            <app-button  [class]="'w-100%'"  (click)="update()" [title]="'UPDATE'"> </app-button>
           </div>
-          <ion-button (click)="update()" expand="block">
-                update
-          </ion-button>
+         
    
 
         </div>

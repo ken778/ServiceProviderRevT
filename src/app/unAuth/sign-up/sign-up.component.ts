@@ -18,6 +18,10 @@ import { authUser, registerModule } from 'src/app/shared/models/interfaces/user/
 })
 export class SignUpComponent  implements OnInit {
 
+  //default profile pic 
+   profilePic = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqjYWb_kZ7jZ_aCJJdFjLqxS-DBaGsJGxopg&usqp=CAU'
+
+
   //registration instance
   public registrationInstance = new registerModule()
 
@@ -51,13 +55,11 @@ export class SignUpComponent  implements OnInit {
   signUp(){
     console.log('i am clicked')
     console.log(this.formGroup.value)
-
     //sign up details
     const authData = {
        email:this.formGroup.get('email')?.value,
        password:this.formGroup.get('password')?.value
     }
-
     //data to save to database
     const userData = {
       first_name:  String(this.formGroup.get('firstName')?.value),
@@ -65,13 +67,11 @@ export class SignUpComponent  implements OnInit {
       email_address:String(this.formGroup.get('email')?.value),
       phone_number:String(this.formGroup.get('phoneNumber')?.value),
       city:String(this.formGroup.get('city')?.value),
-      
+      imageUrl: this.profilePic
     }
     this._auth.registerEmailInstance = userData,
     this._auth.register(String(authData.email), String(authData.password))
    
- 
-
    this._router.navigate(['/sign-in'])
  
 
