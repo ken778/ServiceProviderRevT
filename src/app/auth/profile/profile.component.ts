@@ -40,6 +40,8 @@ export class ProfileComponent implements OnInit {
   userInfo!: any;
   operatingHours!: any;
   storeAddress!: any;
+  spinner = false
+  storeDetails!: any;
 
   constructor(
     private _route: Router,
@@ -56,6 +58,8 @@ export class ProfileComponent implements OnInit {
     //   error: (error) => {console.log(error)},
     //  })
     this.getUserId();
+    this.spinner = true
+    console.log(this.spinner)
   }
 
   editContacts() {
@@ -124,12 +128,13 @@ export class ProfileComponent implements OnInit {
 
   //fetch user
   getUserDetail(uid: any) {
-    
+
     this._auth.getUser(uid).subscribe({
       next: (snapshot) => {
         console.log(snapshot);
         this.userInfo = snapshot;
         console.log('data', this.userInfo);
+        this.spinner = false
       },
       error: (error) => {
         console.log(error);
@@ -143,7 +148,7 @@ export class ProfileComponent implements OnInit {
       next: (res) => {
         console.log('hours', res);
         this.operatingHours = res
-        console.log(this.operatingHours.saturdaysStartTime)
+       
 
       },
       error: (error) => {
@@ -171,6 +176,7 @@ export class ProfileComponent implements OnInit {
       next: (data) => {
         console.log('id', data?.uid);
         this.getUserDetail(data?.uid);
+        this.getStoreDetails(data?.uid);
         this.getStoreOperatingHours(data?.uid);
         this.getStoreAddress(data?.uid);
       },
@@ -185,6 +191,24 @@ export class ProfileComponent implements OnInit {
     this._auth.loggedInUser().subscribe({
       next: () => {
         this._route.navigate(['/sign-in']);
+      },
+    });
+  }
+  //navigate to edit profile
+  editProfile() {
+    this._route.navigate(['/edit-profile']);
+  }
+
+  //get store details
+  getStoreDetails(id:any){
+    this._auth.getStoreDetails(id).subscribe({
+      next: (res) => {
+        console.log('details', res);
+        this.storeDetails = res
+        console.log(this.storeDetails)
+      },
+      error: (error) => {
+        console.log('while fetching details', error);
       },
     });
   }

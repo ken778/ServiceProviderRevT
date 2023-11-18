@@ -1,4 +1,4 @@
-<app-header [Heading]="'Store Details'"></app-header>
+<app-header [Heading]="'Edit Profile'"></app-header>
 <ion-content>
   <div class="fluid">
     <div class="row justify-content-center">
@@ -6,7 +6,7 @@
           <div class="form-container mt-5">
              <h2 class="text-center">
                  <ion-text >
-                       Edit Store Details
+                      Edit Profile
                  </ion-text>
              </h2>
              <div [ngStyle]="imagecontainer" class="image-container  m-1 p-2">
@@ -17,45 +17,47 @@
               <ion-icon (click)="takePicture()" class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
             </div>
             <app-input
-            [placeholder]="'Store Name'"
-            [control]="formGroup.controls.store_name"
-            [iconName]="'storefront-outline'"
+            [placeholder]="'First name'"
+            [control]="formGroup.controls.first_name"
+            [iconName]="'person-outline'"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Email Address'"
-            [iconName]="'mail-outline'"
-            [control]="formGroup.controls.email_address"
+            [placeholder]="'Last Name'"
+            [iconName]="'person-outline'"
+            [control]="formGroup.controls.last_name"
             
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Office Number'"
+            [placeholder]="'Phone Number'"
             [iconName]="'call-outline'"
-            [control]="formGroup.controls.office_no_1"
+            [control]="formGroup.controls.phone_number"
             >
   
             </app-input>
             <app-input
-            [placeholder]="'Office Alternative Number'"
-            [iconName]="'call-outline'"
-            [control]="formGroup.controls.office_no_2"
+            [placeholder]="'Email'"
+            [iconName]="'mail-outline'"
+            [control]="formGroup.controls.email_address"
+
+            >
+  
+            </app-input>
+            <app-input
+            [placeholder]="'City'"
+            [iconName]="'location-outline'"
+            [control]="formGroup.controls.city"
 
             >
   
             </app-input>
        
-            <app-text-area 
-            [placeholder]="'Description'"
-            [control]="formGroup.controls.desc"
-            ></app-text-area>
+         
             <div class="addButton pt-2">
-                <app-button *ngIf="storeDetails" [class]="'w-100%'" (click)="updateStore()" [title]="'UPDATE'">
-            
-                </app-button> 
-                <app-button *ngIf="!storeDetails" [class]="'w-100%'" (click)="updateStore()" [title]="'ADD'">
+                <app-button [class]="'w-100%'" (click)="updateDetails()" [title]="'UPDATE'">
             
                 </app-button> 
               </div>

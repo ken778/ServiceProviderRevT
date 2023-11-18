@@ -14,6 +14,7 @@ import { EditOperationHoursComponent } from './auth/edit-operation-hours/edit-op
 import { EditStoreAddressComponent } from './auth/edit-store-address/edit-store-address.component';
 import { PrintReportComponent } from './auth/print-report/print-report.component';
 import { ProductDetailsComponent } from './auth/product-details/product-details.component';
+import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'sign-up',
@@ -56,6 +57,9 @@ const routes: Routes = [
   },
   {
     path: 'chat/:id', component: ChatComponent
+  },
+  {
+    path: 'edit-profile', component: EditProfileComponent
   },
   {
     path: 'productDetails/:id', component: ProductDetailsComponent

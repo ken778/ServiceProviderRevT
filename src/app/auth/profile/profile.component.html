@@ -3,29 +3,34 @@
   <div class="fluid">
     <div class="row justify-content-center ">
       <div class="col col-md-6 mt-md-5 pt-md-5">
+        <div class="spinner-overlay" *ngIf="spinner">
+          <ion-spinner color="success" name="lines"></ion-spinner>
+        </div>
+        
         <ion-item class="profile-banner ion-text-center">
           <ion-text class="text-light" *ngIf="userInfo">{{userInfo.first_name}} {{userInfo.last_name}}</ion-text>
         </ion-item>
         <div class="avatar justify-content-center">
           <ion-avatar>
             <img *ngIf="userInfo" [src]="userInfo.imageUrl" />
+            <img *ngIf="!userInfo"  src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+
           </ion-avatar>
-          <ion-icon (click)="takePicture()" name="camera"></ion-icon>
+          <ion-icon (click)="editProfile()" name="create"></ion-icon>
         </div>
 
         <div class="farmName">
-          <ion-text class="p-3"
-            ><ion-icon name="storefront-outline"></ion-icon> Farm
-            Store</ion-text
+          <ion-text *ngIf="storeDetails"  class="p-3"
+            ><ion-icon name="storefront-outline"></ion-icon> {{storeDetails.store_name}}</ion-text
           >
         </div>
         <div class="cards">
           <ion-item class="card m-2">
             <ion-list>
               <ion-label>Contact Details</ion-label>
-              <div *ngIf="userInfo" class="div">
-                <ion-text>{{userInfo.phone_number }}</ion-text><br />
-                <ion-text>{{userInfo.email_address}}</ion-text>
+              <div *ngIf="storeDetails" class="div">
+                <ion-text>{{storeDetails.office_no_1 }}</ion-text><br />
+                <ion-text>{{storeDetails.email_address}}</ion-text>
               </div>
             
             </ion-list>
@@ -72,7 +77,7 @@
             </ion-button>
            
           </ion-item>
-          <button class="btn btn-primary" (click)="logout()">logout</button>
+          <ion-button class="logout-button" color="danger" expand="block" (click)="logout()">logout</ion-button>
         </div>
       </div>
     </div>

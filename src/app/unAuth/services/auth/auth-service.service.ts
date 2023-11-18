@@ -37,14 +37,14 @@ export class AuthServiceService {
   register(email: string, password: string) {
     this.afs
       .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
+      .then((res:any) => {
         console.log('registred', res);
         const user = res.user;
         const uid = user?.uid;
         console.log('user details', user);
         this.addNewUser(uid, user)
       })
-      .catch((error) => {
+      .catch((error:any) => {
         console.log(error);
       });
   }
@@ -76,8 +76,8 @@ export class AuthServiceService {
   //get sinfle user details
   getUser(uid:any): Observable<any> {
     const startCountRef = ref(this.database, 'persons/' + uid);
-    return new Observable((observer) => {
-      const unsubscribe = onValue(startCountRef, (snapshot) => {
+    return new Observable((observer:any) => {
+      const unsubscribe = onValue(startCountRef, (snapshot:any) => {
         const data = snapshot.val();
         observer.next(data);
       });
@@ -86,6 +86,7 @@ export class AuthServiceService {
       };
     });
   }
+
 
   //get store opertaing hours 
   getStoreHours(uid:any): Observable<any> {
@@ -122,13 +123,40 @@ export class AuthServiceService {
     return new Observable((observer) => {
       const unsubscribe = onValue(startCountRef, (snapshot) => {
         const data = snapshot.val();
-        observer.next(data);
+          // Transform data to an array of objects without IDs
+          const dataArray = Object.keys(data).map((key) => {
+            const { id, ...userData } = data[key];
+            return userData;
+          });
+          
+        observer.next(dataArray);
+  
       });
       return () => {
         unsubscribe();
       };
     });
   }
+  // getUsers(): Observable<any[]> {
+  //   const startCountRef = ref(this.database, 'persons');
+  //   return new Observable((observer) => {
+  //     const unsubscribe = onValue(startCountRef, (snapshot) => {
+  //       const data = snapshot.val();
+
+  //       // Transform data to an array of objects without IDs
+  //       const dataArray = Object.keys(data).map((key) => {
+  //         const { id, ...userData } = data[key];
+  //         return userData;
+  //       });
+
+  //       observer.next(dataArray);
+  //     });
+
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   });
+  // }
 
   //add store address
   addStoreAddressData(id:any,data:any) {
@@ -151,6 +179,29 @@ export class AuthServiceService {
   addOperationsHours(id:any, data:any){
       return set(ref(this.database, 'storeOperationHours/' + id), data)
   }
+
+    //get store details
+    getStoreDetails(uid:any): Observable<any> {
+      const startCountRef = ref(this.database, 'stores/' + uid);
+      return new Observable((observer) => {
+        const unsubscribe = onValue(startCountRef, (snapshot) => {
+          const data = snapshot.val();
+          observer.next(data);
+        });
+        return () => {
+          unsubscribe();
+        };
+      });
+    }
+
+    //upda te user 
+    updateUser(uid:any, data:any){
+      return update(ref(this.database, 'persons/' + uid), data)
+    }
+    //upda te user 
+    updateStore(uid:any, data:any){
+      return update(ref(this.database, 'stores/' + uid), data)
+    }
 
   //logout 
 logoutUser(){
