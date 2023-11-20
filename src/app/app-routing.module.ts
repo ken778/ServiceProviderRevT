@@ -15,6 +15,7 @@ import { EditStoreAddressComponent } from './auth/edit-store-address/edit-store-
 import { PrintReportComponent } from './auth/print-report/print-report.component';
 import { ProductDetailsComponent } from './auth/product-details/product-details.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
+import { AddProductComponent } from './auth/add-product/add-product.component';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'sign-up',
@@ -63,6 +64,9 @@ const routes: Routes = [
   },
   {
     path: 'productDetails/:id', component: ProductDetailsComponent
+  },
+  {
+    path: 'add-product', component: AddProductComponent
   },
   {
     path: 'home',

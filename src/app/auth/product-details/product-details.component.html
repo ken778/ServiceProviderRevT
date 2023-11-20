@@ -8,7 +8,8 @@
            <div class="form-container">
             <div class="image-container  m-1 p-2">
               <ion-avatar class="m-auto">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <img *ngIf="!productDetails" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <img *ngIf="productDetails"  [src]="imageUrl" />
               </ion-avatar>
               <ion-icon class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
             </div>
@@ -17,25 +18,30 @@
      
           >
           </app-dropdown-input>
-            <app-input
-            [placeholder]="'Product name'"
-            >
-  
-            </app-input>
-            <app-input
-            [placeholder]="'price'"
-            >
-  
-            </app-input>
-            <app-input
-            [placeholder]="'Quantity'"
-            >
-  
-            </app-input>
-            <app-text-area
-            >
-  
-            </app-text-area>
+              <app-input
+                [placeholder]="'Product name'"
+                [iconName]="'pricetag-outline'"
+                [control]="productForm.controls.productName"
+                >
+      
+                </app-input>
+                <app-input
+                [placeholder]="'Bundle price'"
+                [iconName]="'cash-outline'"
+                [control]="productForm.controls.bundlePrice"
+                >
+      
+                </app-input>
+                <app-input
+                [placeholder]="'Item quantity'"
+                [iconName]="'albums-outline'"
+                [control]="productForm.controls.itemQuantity"
+                >
+                </app-input>
+                <app-text-area 
+                [placeholder]="'Description'"
+                [control]="productForm.controls.desc"
+                ></app-text-area>
             <div class="addButton pt-2">
               <app-button [class]="'w-100%'" [title]="'UPDATE'">
   

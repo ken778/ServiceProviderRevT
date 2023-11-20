@@ -9,7 +9,7 @@ import { InputComponent } from 'src/app/shared/components/input/input.component'
 import { Category } from '../produncts-objects/products-object';
 import { of } from 'rxjs';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area.component';
 import { categories } from 'src/app/shared/product-objects/product-objects';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -58,6 +58,7 @@ export class ProductsComponent implements OnInit {
   //variables
   status = "IN_STOCK"
   store_key!:any;
+  productList!:any;
   
 
   //forn input
@@ -207,7 +208,7 @@ export class ProductsComponent implements OnInit {
   imageSource!:any;
   imageUrl!:any;
 
-  constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService) {
+  constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router) {
     this.getLoogedInUser()
   }
 
@@ -248,6 +249,7 @@ export class ProductsComponent implements OnInit {
       next: (res) => {
         this.store_key = res?.uid
         console.log(this.store_key)
+        this.getProducts(this.store_key )
       },
       error: (err) => {
         console.log(err)
@@ -278,11 +280,32 @@ export class ProductsComponent implements OnInit {
 
   //adding product to database
   saveProduct(id:any,data:any) {
-      this._productServ.addProduct(id,data).then(() => {
+      this._productServ.addProduct(data).then(() => {
         console.log('success adding product')
       })
       .catch((err) => {
          console.log('Error adding product')
       })
+  }
+
+  //get products 
+  getProducts(storeKey:any){
+    this._productServ.getProductsById(storeKey).subscribe({
+      next: (res) => {
+        this.productList = res
+        console.log(this.productList)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  navigateToProductDetails(product: any) {
+    this.router.navigate(['/productDetails', product.id]);
+  }
+
+  openModal(){
+    this.router.navigate(['add-product']);
   }
 }

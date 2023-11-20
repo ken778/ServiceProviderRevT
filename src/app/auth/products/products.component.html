@@ -4,39 +4,54 @@
     <div class="row">
       <div class="col">
        
-        <div *ngFor="let item of products$ | async " class="mt-3 productContainer">
-          <a [routerLink]="['/productDetails', item.id]"> 
-        
-          <div class="row">
-            <div class="col col-2">
-              <ion-avatar class="mt-2" slot="start">
-                <img
-                  alt="Silhouette of a person's head"
-                  src="https://static.vecteezy.com/system/resources/previews/005/539/606/original/3d-realistic-transparent-isolated-set-whole-and-slice-of-watermelon-watermelon-in-a-splash-of-juice-with-drops-free-vector.jpg"
-                />
-              </ion-avatar>
-            </div>
-            <div class="col Product-details-container">
-              <ion-text>{{item.productName}}</ion-text>
-              <ion-grid>
-                <!-- Header row -->
-                <ion-row class="table-header">
-                  <ion-col>Sold out</ion-col>
-                  <ion-col>In stock</ion-col>
-                  <ion-col>Quantity</ion-col>
-                </ion-row>
-
-                <!-- Data rows -->
-                <ion-row class="table-row">
-                  <ion-col>{{item.soldOut}}</ion-col>
-                  <ion-col>{{item.soldOut}}</ion-col>
-                  <ion-col>{{item.quantity}}</ion-col>
-                </ion-row>
-              </ion-grid>
-            </div>
+        <!-- if there is nothing to show  -->
+        <div *ngIf="!productList" class="empty">
+         
+          <div class="empty-text text-center p-4">
+            <h2>No Products Found</h2>
+            <p>There are currently no products to display.</p>
           </div>
-        </a>
         </div>
+
+        <!-- if there something to show -->
+        <div *ngIf="productList" class="notEmpty">
+          <div *ngFor="let item of productList" class="mt-3 productContainer">
+            <a [routerLink]="['/productDetails', item.id]"> 
+          
+            <div class="row">
+              <div class="col col-2">
+                <ion-avatar class="mt-2" slot="start">
+                  <img
+                    alt="Silhouette of a person's head"
+                   [src]="item.url"
+                  />
+                </ion-avatar>
+              </div>
+              <div class="col Product-details-container">
+                <ion-text>{{item.name}}</ion-text>
+                <ion-grid>
+                  <!-- Header row -->
+                  <ion-row class="table-header">
+                    <ion-col>Sold out</ion-col>
+                    <ion-col>In stock</ion-col>
+                    <ion-col>Quantity</ion-col>
+                  </ion-row>
+  
+                  <!-- Data rows -->
+                  <ion-row class="table-row">
+                    <ion-col>{{item.character.quantity_sold}}</ion-col>
+                    <ion-col>{{item.character.quantity_available}}</ion-col>
+                    <ion-col>{{item.character.quantity_added}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </div>
+          </a>
+          </div>
+        </div>
+
+
+        
       </div>
     </div>
   </div>
@@ -82,7 +97,7 @@
     </ng-template>
   </ion-modal> -->
      <!-- modal -->
-     <app-modal trigger="open-modal">
+     <!-- <app-modal trigger="open-modal">
       <div class="block p-3">
         <div [ngStyle]="imagecontainer" class="image-container  m-1 p-2">
           <ion-avatar [ngStyle]="avatarStyle" class="m-auto">
@@ -129,9 +144,9 @@
           </div>
         
       </div>
-    </app-modal>
+    </app-modal> -->
 </ion-content>
-<ion-fab id="open-modal" slot="fixed" vertical="bottom" horizontal="end">
+<ion-fab  slot="fixed" vertical="bottom" horizontal="end" (click)="openModal()">
   <ion-fab-button>
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

@@ -1,0 +1,56 @@
+<app-header [Heading]="'Add Product'"></app-header>
+<ion-content>
+  <div class="container">
+      <div class="row">
+          <div class="col">
+                
+            <div class="block p-3">
+              <div [ngStyle]="imagecontainer" class="image-container  m-1 p-2">
+                <ion-avatar [ngStyle]="avatarStyle" class="m-auto">
+                  <img *ngIf="!imageUrl" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  <img *ngIf="imageUrl" alt="Silhouette of a person's head" [src]="imageUrl" />
+                </ion-avatar>
+                <ion-icon (click)="takePicture()" class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
+              </div>
+              <app-dropdown-input
+                [label]="'Category'"
+                [options]="categories" (ionChange)="selectedValueChanged($event)"
+                [control]="productForm.controls.category"
+              >
+              </app-dropdown-input>
+             
+                <app-input
+                [placeholder]="'Product name'"
+                [iconName]="'pricetag-outline'"
+                [control]="productForm.controls.productName"
+                >
+      
+                </app-input>
+                <app-input
+                [placeholder]="'Bundle price'"
+                [iconName]="'cash-outline'"
+                [control]="productForm.controls.bundlePrice"
+                >
+      
+                </app-input>
+                <app-input
+                [placeholder]="'Item quantity'"
+                [iconName]="'albums-outline'"
+                [control]="productForm.controls.itemQuantity"
+                >
+                </app-input>
+                <app-text-area 
+                [placeholder]="'Description'"
+                [control]="productForm.controls.desc"
+                ></app-text-area>
+                <div class="addButton pt-2">
+                  <app-button [class]="'w-100%'" (click)="addProduct()" [title]="'ADD'">
+      
+                  </app-button> 
+                </div>
+              
+            </div>
+          </div>
+      </div>
+  </div>
+</ion-content>
