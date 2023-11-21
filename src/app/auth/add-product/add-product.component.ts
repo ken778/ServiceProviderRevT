@@ -61,7 +61,7 @@ export class AddProductComponent  implements OnInit {
   ngOnInit() {}
 
   customPopoverOptions2 = {
-    subHeader: 'Select your Title',
+    subHeader: 'Select category',
   };
   selectedValueChanged(value:any){
      console.log(value.target.value)
@@ -103,24 +103,31 @@ export class AddProductComponent  implements OnInit {
   }
 
   addProduct(){
-   const productData = {
-       status: this.status,
-       name: this.productForm.get('productName')?.value,
-       desc: this.productForm.get('desc')?.value,
-       url: this.imageUrl,
-       store_key:this.store_key,
-       character:{
-         price: this.productForm.get('bundlePrice')?.value,
-         quantity_added: this.productForm.get('itemQuantity')?.value,
-         quantity_available:this.productForm.get('itemQuantity')?.value,
-         quantity_sold: 0,
-         status: this.status,
-       }
-
+    if(this.productForm.valid){
+      const productData = {
+        status: this.status,
+        name: this.productForm.get('productName')?.value,
+        desc: this.productForm.get('desc')?.value,
+        url: this.imageUrl,
+        store_key:this.store_key,
+ 
+        character:{
+          price: this.productForm.get('bundlePrice')?.value,
+          quantity_added: this.productForm.get('itemQuantity')?.value,
+          quantity_available:this.productForm.get('itemQuantity')?.value,
+          quantity_sold: 0,
+          status: this.status,
+          category: this.productForm.get('category')?.value,
+        }
+ 
+     }
+     this.saveProduct(this.store_key, productData)
+     
+     console.log(this.productForm.value)
+    }else{
+      this._toast.presentToast('Please fill all the fields', 'danger')
     }
-    this.saveProduct(this.store_key, productData)
-    
-    console.log(this.productForm.value)
+  
   }
 
   //adding product to database
@@ -128,6 +135,7 @@ export class AddProductComponent  implements OnInit {
       this._productServ.addProduct(data).then(() => {
         console.log('success adding product')
         this._toast.presentToast('Product Added Successfully', 'success')
+        this.router.navigate(['/home/products'])
       })
       .catch((err) => {
         this._toast.presentToast('There was a problem while adding product', 'danger')

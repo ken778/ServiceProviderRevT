@@ -11,11 +11,12 @@
                 <img *ngIf="!productDetails" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 <img *ngIf="productDetails"  [src]="imageUrl" />
               </ion-avatar>
-              <ion-icon class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
+              <ion-icon (click)="takePicture()" class="camera-icon" slot="end" size="large" name="camera"></ion-icon>
             </div>
             <app-dropdown-input
             [label]="'Category'"
-     
+            [control]="productForm.controls.category"
+            [options]="categories" (ionChange)="selectedValueChanged($event)"
           >
           </app-dropdown-input>
               <app-input
@@ -43,7 +44,7 @@
                 [control]="productForm.controls.desc"
                 ></app-text-area>
             <div class="addButton pt-2">
-              <app-button [class]="'w-100%'" [title]="'UPDATE'">
+              <app-button [class]="'w-100%'" (click)="updateProduct()"[title]="'UPDATE'">
   
               </app-button> 
             </div>

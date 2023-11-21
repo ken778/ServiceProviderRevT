@@ -19,6 +19,7 @@ export class SignInComponent  implements OnInit {
   //variables
   email!: string;
   password!:string;
+  logoImage = 'assets/icons.png';
 
   formGroup = new FormGroup({
     email:new FormControl('', [Validators.required]),
@@ -49,6 +50,9 @@ export class SignInComponent  implements OnInit {
     })
 
     console.log('data from instence', this._auth.registerEmailInstance)
+  }
+  toSignUp(){
+    this.router.navigate(['/sign-up'])
   }
 
 }

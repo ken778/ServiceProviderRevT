@@ -171,23 +171,26 @@ export class EditContactDetailsComponent  implements OnInit {
   }
   //ADD STORE 
   addStore(){
-    const data = {
-      store_name: this.formGroup.get('store_name')?.value,
-      desc: this.formGroup.get('desc')?.value,
-      email_address: this.formGroup.get('email_address')?.value,
-      office_no_1: this.formGroup.get('office_no_1')?.value,
-      office_no_2: this.formGroup.get('office_no_2')?.value,
-      storeImage: this.imageUrl,
-      isActive:true,
-      isVarified: false,
-      ownerId:this.ownerId
-
+    if(this.formGroup.valid){
+      const data = {
+        store_name: this.formGroup.get('store_name')?.value,
+        desc: this.formGroup.get('desc')?.value,
+        email_address: this.formGroup.get('email_address')?.value,
+        office_no_1: this.formGroup.get('office_no_1')?.value,
+        office_no_2: this.formGroup.get('office_no_2')?.value,
+        storeImage: this.imageUrl,
+        isActive:true,
+        isVarified: false,
+        ownerId:this.ownerId
+  
+      }
+      this._authServ.addStoreDetails(this.ownerId,data).then(() => {
+        this._toast.presentToast('Store added successfully','success');
+      }).catch(() => {
+        this._toast.presentToast('Store not added', 'danger');
+      })
     }
-    this._authServ.addStoreDetails(this.ownerId,data).then(() => {
-      this._toast.presentToast('Store added successfully','success');
-    }).catch(() => {
-      this._toast.presentToast('Store not added', 'danger');
-    })
+   
   }
 
 }

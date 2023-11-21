@@ -72,6 +72,15 @@ export class ProductService {
       };
     })
   }
+
+//update product
+  updateProduct(id: any, data: any) {
+    const productRef = ref(this.database, 'product/' + id);
+    return update(productRef, data);
+  }
+
+
+//delete product
    
 
 

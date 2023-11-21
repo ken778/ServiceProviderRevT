@@ -2,12 +2,12 @@
   <div class="fluid">
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="logo pt-5 mt-5">
-          <ion-text>
-            <h1 class="text-center">LOGO</h1>
+        <div class="logo pt-5 mt-5 text-center p-2">
+          <ion-text class="text-center">
+            <img alt="logo" [src]="logoImage" />
           </ion-text>
         </div>
-        <div class="heading text-center text-muted">
+        <div class="heading text-center text-muted p-3">
           <ion-text>
             <h3>Service Provider Acoount Details</h3>
           </ion-text>
@@ -21,6 +21,7 @@
         <app-input
           [iconName]="'call-outline'"
           [placeholder]="'Password'"
+          type="password"
           [control]="formGroup.controls.password"
         ></app-input>
         <div class="button mt-4">
@@ -28,8 +29,8 @@
         </div>
         <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
           <ion-text>
-              <h6>
-                 Already have an account? <ion-text class="text-success">Sign in</ion-text>
+              <h6 (click)="toSignUp()">
+                Don't have an account? <ion-text class="text-success">Sign up</ion-text>
               </h6>
           </ion-text>
       </div>

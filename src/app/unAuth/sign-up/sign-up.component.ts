@@ -20,7 +20,7 @@ export class SignUpComponent  implements OnInit {
 
   //default profile pic 
    profilePic = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqjYWb_kZ7jZ_aCJJdFjLqxS-DBaGsJGxopg&usqp=CAU'
-
+   logoImage = 'assets/icons.png';
 
   //registration instance
   public registrationInstance = new registerModule()
@@ -75,6 +75,9 @@ export class SignUpComponent  implements OnInit {
    this._router.navigate(['/sign-in'])
  
 
+}
+toLogin(){
+  this._router.navigate(['/sign-in'])
 }
 
 }
