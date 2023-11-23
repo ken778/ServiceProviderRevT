@@ -18,7 +18,7 @@ import { EditProfileComponent } from './auth/edit-profile/edit-profile.component
 import { AddProductComponent } from './auth/add-product/add-product.component';
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'sign-up',
+    path: '', pathMatch: 'full', redirectTo: 'sign-in',
   },
   {
     path: 'sign-up', component: SignUpComponent
