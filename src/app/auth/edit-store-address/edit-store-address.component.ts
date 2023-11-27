@@ -18,7 +18,7 @@ import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
   templateUrl: './edit-store-address.component.html',
   styleUrls: ['./edit-store-address.component.scss'],
   standalone:true,
-  imports:[IonicModule, CommonModule, NgIf, HeaderComponent, ButtonComponent, InputComponent]
+  imports:[IonicModule, CommonModule, NgIf, HeaderComponent, ButtonComponent, InputComponent,]
 })
 export class EditStoreAddressComponent  implements OnInit {
 
@@ -32,23 +32,27 @@ export class EditStoreAddressComponent  implements OnInit {
    isoCountryCode!:string;
    name!:string;
    streetNumber!:string;
+   streetName!:string;
    subregion!:string;
    region!:string;
    PostalCode!:string;
    AddressLine2 = ""
    city!:any;
    street = ""
+   
    addressObData: any
    //cordinates
    latitude!:any;
    longitude!:any;
    //user id
    userId!:any;
+   storeAdress:any;
 
   constructor(private geolocation: Geolocation, private  _locService: LocationService, private _authServ: AuthServiceService, private _toast:ToastService) { }
 
   formGroup = new FormGroup({
     street:new FormControl('', [Validators.required]),
+    streetName: new FormControl('', [Validators.required]),
     subRegion:new FormControl('', [Validators.required]),
     city:new FormControl('', [Validators.required]),
     region:new FormControl('', [Validators.required]),
@@ -80,13 +84,9 @@ export class EditStoreAddressComponent  implements OnInit {
         // console.log(res)
         this.storeAddressObject = res.address
         //  console.log('from class module',this.storeAddressObject)
-     
-
          //asign values
          this.assignValues(lati, langi, res)
-
          console.log('--------------------------------', res)
-  
       },
       error: (err) => {
         console.log(err)
@@ -99,6 +99,7 @@ export class EditStoreAddressComponent  implements OnInit {
       next: (res) => {
         this.userId = res?.uid
         console.log(this.userId)
+        this.getStoreAdressDetails(this.userId)
       },
       error: (err) => {
         console.log(err)
@@ -120,7 +121,8 @@ export class EditStoreAddressComponent  implements OnInit {
          this.region = this.storeAddressObject.state
          this.PostalCode = this.storeAddressObject.postcode
          this.AddressLine2 = this.AddressLine2
-         this.city = this.storeAddressObject.county
+         this.city = this.storeAddressObject.city
+         this.streetName  = this.storeAddressObject.road
 
      this.addressObData = {
       address: this.address,
@@ -129,6 +131,7 @@ export class EditStoreAddressComponent  implements OnInit {
       isoCountryCode : this.isoCountryCode,
       name :this.name,
       streetNumber :this.streetNumber,
+    
       // subregion :this.subregion,
       // region :this.region,
       // PostalCode :this.PostalCode,
@@ -148,6 +151,7 @@ export class EditStoreAddressComponent  implements OnInit {
   //populate form using current location
   autoPopulate(){
     this.formGroup.get('street')?.setValue(this.street)
+    this.formGroup.get('streetName')?.setValue(this.streetName)
     this.formGroup.get('subRegion')?.setValue(this.subregion)
     this.formGroup.get('city')?.setValue(this.city)
     this.formGroup.get('region')?.setValue(this.region)
@@ -161,6 +165,7 @@ export class EditStoreAddressComponent  implements OnInit {
     const storeAddressData = {
       ...this.addressObData,
       street:this.formGroup.get('street')?.value,
+      streetName: this.formGroup.get('streetName')?.value,
       subRegion:this.formGroup.get('subRegion')?.value,
       city:this.formGroup.get('city')?.value,
       region:this.formGroup.get('region')?.value,
@@ -189,6 +194,32 @@ export class EditStoreAddressComponent  implements OnInit {
           console.log('error adding address data')
           this._toast.presentToast('Could not update details', 'danger')
      })
+  }
+
+  //get store adress data from database
+  getStoreAdressDetails(id:any){
+    this._authServ.getStoreAddress(id).subscribe({
+      next: (res) => {
+        console.log(res)
+        console.log(res)
+        this.storeAdress = res
+        this.fillForm(this.storeAdress)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  //fill form
+  fillForm(data:any) {
+    this.formGroup.get('street')?.setValue(data.street)
+    this.formGroup.get('subRegion')?.setValue(data.district)
+    this.formGroup.get('city')?.setValue(data.city)
+    this.formGroup.get('region')?.setValue(data.region)
+    this.formGroup.get('PostalCode')?.setValue(data.PostalCode)
+    this.formGroup.get('AddressLine2')?.setValue(data.AddressLine2)
+    this.formGroup.get('streetName')?.setValue(data.streetName)
   }
 
 

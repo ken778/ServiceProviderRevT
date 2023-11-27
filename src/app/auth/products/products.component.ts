@@ -59,6 +59,7 @@ export class ProductsComponent implements OnInit {
   status = "IN_STOCK"
   store_key!:any;
   productList!:any;
+  productsAvailable = false
   
 
   //forn input
@@ -160,6 +161,13 @@ export class ProductsComponent implements OnInit {
       next: (res) => {
         this.productList = res
         console.log(this.productList)
+        if(this.productList.length > 0){
+          this.productsAvailable = true
+          console.log(this.productsAvailable)
+        }else{
+          this.productsAvailable = false
+          console.log(this.productsAvailable)
+        }
       },
       error: (err) => {
         console.log(err)

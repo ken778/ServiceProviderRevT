@@ -5,7 +5,7 @@
       <div class="col">
        
         <!-- if there is nothing to show  -->
-        <div *ngIf="!productList" class="empty">
+        <div *ngIf="!productsAvailable" class="empty">
          
           <div class="empty-text text-center p-4">
             <h2>No Products Found</h2>
@@ -14,7 +14,7 @@
         </div>
 
         <!-- if there something to show -->
-        <div *ngIf="productList" class="notEmpty">
+        <div *ngIf="productsAvailable" class="notEmpty">
           <div *ngFor="let item of productList" class="mt-3 productContainer">
             <a [routerLink]="['/productDetails', item.id]"> 
           

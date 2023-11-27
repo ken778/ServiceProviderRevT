@@ -1,6 +1,6 @@
-<app-header [Heading]="'Profile'"></app-header>
+<!-- <app-header [Heading]="'Profile'"></app-header> -->
 <ion-content>
-  <div class="fluid">
+  <div >
     <div class="row justify-content-center ">
       <div class="col col-md-6 mt-md-5 pt-md-5">
         <div class="spinner-overlay" *ngIf="spinner">
@@ -27,7 +27,7 @@
         <div class="cards">
           <ion-item class="card m-2">
             <ion-list>
-              <ion-label>Contact Details</ion-label>
+              <ion-label>Store Details</ion-label>
               <div *ngIf="storeDetails" class="div">
                 <ion-text>{{storeDetails.office_no_1 }}</ion-text><br />
                 <ion-text>{{storeDetails.email_address}}</ion-text>

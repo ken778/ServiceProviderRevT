@@ -10,16 +10,25 @@
                  </ion-text> 
              </h2>
              <div class="addButton pt-2">
-              <app-button [class]="'w-100%'" (click)="autoPopulate()" [title]="'use current address'">
-             
-              </app-button> 
+              <!-- <app-button [class]="'w-100%'" (click)="autoPopulate()" [title]="'use current address'">
+               
+              </app-button>  -->
+              <ion-button expand="block" (click)="autoPopulate()" >
+                <ion-icon slot="start"  name="pin"></ion-icon>
+                 USE CURRENT LOCATION
+              </ion-button>
             </div>
             <app-input
             [iconName]="'location-outline'"
-            [placeholder]="'Street'"
+            [placeholder]="'Street Number'"
             [control]="formGroup.controls.street"
             >
-  
+            </app-input>
+            <app-input
+            [iconName]="'location-outline'"
+            [placeholder]="'Street Name'"
+            [control]="formGroup.controls.streetName"
+            >
             </app-input>
             <app-input
             [iconName]="'location-outline'"
@@ -57,8 +66,9 @@
   
             </app-input>
             <div class="addButton pt-2">
-                <app-button [class]="'w-100%'" (click)="updatedetails()" [title]="'UPDATE'">
-               
+                <app-button *ngIf="storeAdress" [class]="'w-100%'" (click)="updatedetails()" [title]="'UPDATE'">
+                </app-button> 
+                <app-button *ngIf="!storeAdress" [class]="'w-100%'" (click)="updatedetails()" [title]="'ADD'">
                 </app-button> 
               </div>
           </div>

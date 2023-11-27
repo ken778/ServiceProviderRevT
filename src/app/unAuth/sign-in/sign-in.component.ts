@@ -74,6 +74,9 @@ export class SignInComponent implements OnInit {
           if (error.code === 'auth/wrong-password') {
             this._toast.presentToast('wrong-password', 'danger');
           }
+          if (error.code === 'auth/too-many-requests') {
+            this._toast.presentToast('Access to this account has been temporarily disabled due to many failed login attempts', 'danger');
+          }
           this.spinner = false;
         });
 
@@ -86,3 +89,5 @@ export class SignInComponent implements OnInit {
     this.router.navigate(['/sign-up']);
   }
 }
+
+
