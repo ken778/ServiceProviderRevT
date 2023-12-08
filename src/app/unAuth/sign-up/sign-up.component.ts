@@ -8,13 +8,15 @@ import { AuthServiceService } from '../services/auth/auth-service.service';
 
 import {Database,set,ref,update, onValue} from '@angular/fire/database'
 import { authUser, registerModule } from 'src/app/shared/models/interfaces/user/user.iterface';
+import { NgIf } from '@angular/common';
+import { ToastService } from '../services/toast/toast.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports:[IonicModule, InputComponent,ButtonComponent, RouterLink]
+  imports:[IonicModule, InputComponent,ButtonComponent, RouterLink, NgIf]
 })
 export class SignUpComponent  implements OnInit {
 
@@ -24,6 +26,7 @@ export class SignUpComponent  implements OnInit {
 
   //registration instance
   public registrationInstance = new registerModule()
+  spinner = false;
 
   formGroup = new FormGroup({
     firstName:new FormControl('', [Validators.required]),
@@ -34,9 +37,11 @@ export class SignUpComponent  implements OnInit {
     password:new FormControl('', [Validators.required]),
   })
 
-  constructor(private _auth: AuthServiceService,private database: Database, private _router: Router) { }
+  constructor(private _auth: AuthServiceService,private database: Database, private _router: Router, private _toastServ: ToastService) { }
 
   ngOnInit() {
+    
+    console.log(this.spinner)
    this._auth.getUsers().subscribe({
     next: (snapshot) => {
         console.log(snapshot)
@@ -53,6 +58,8 @@ export class SignUpComponent  implements OnInit {
   
 
   signUp(){
+    if(this.formGroup.valid){
+       // this.spinner = true;
     console.log('i am clicked')
     console.log(this.formGroup.value)
     //sign up details
@@ -72,13 +79,24 @@ export class SignUpComponent  implements OnInit {
     this._auth.registerEmailInstance = userData,
     this._auth.register(String(authData.email), String(authData.password))
    
-   this._router.navigate(['/sign-in'])
- 
+  //  this._router.navigate(['/sign-in'])
+  this.spinner = true;
+  setTimeout(() => {
+    this._router.navigate(['/sign-in'])
+    this.spinner = false;
+   
+  }, 2000);
 
+
+    }else{
+     this._toastServ.presentToast("Please fill all the fields", "danger")
+    }
+   
 }
 toLogin(){
   this._router.navigate(['/sign-in'])
 }
+
 
 }
 

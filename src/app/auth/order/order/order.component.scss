@@ -1,0 +1,53 @@
+:host{
+    .Product-details-container{
+        ion-text{
+         font-size: 0.8rem;
+         font-weight: bolder;
+        }
+     }
+     .productContainer{
+        border:1px solid #16924a;
+         ion-avatar{
+             img{
+                 width:3rem;
+                 height:3rem
+             }
+             margin-left: 0.5rem;
+         }
+     }
+     .table-header,.table-row{
+        ion-col{
+         font-size: 0.5rem;
+        }
+       
+     }
+     ion-row{
+       border:none
+        }
+     .table-header {
+         font-weight: bolder;
+         border-bottom: 1px solid #ccc;
+         color: grey;
+       }
+       
+       .table-row {
+         border-bottom: 1px solid #ddd;
+       }
+       
+       ion-col {
+         padding: 4px;
+       }
+       ion-button{
+        --background: #16924a;
+        --color:white;
+        --background-activated:#16924a;
+        margin-left: -25px;
+        margin-top: 15px;
+        height: 0.2rem !important;
+        font-size: 0.5rem;
+      }
+      .buttonName{
+        font-size: 10px !important;
+        padding: 0 !important;
+      }
+}

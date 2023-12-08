@@ -16,6 +16,7 @@ import { PrintReportComponent } from './auth/print-report/print-report.component
 import { ProductDetailsComponent } from './auth/product-details/product-details.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 import { AddProductComponent } from './auth/add-product/add-product.component';
+import { OrderComponent } from './auth/order/order/order.component';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'sign-in',
@@ -64,6 +65,9 @@ const routes: Routes = [
   },
   {
     path: 'productDetails/:id', component: ProductDetailsComponent
+  },
+  {
+    path: 'order/:id', component: OrderComponent
   },
   {
     path: 'add-product', component: AddProductComponent

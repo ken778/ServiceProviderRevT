@@ -1,10 +1,12 @@
 import { CommonModule, NgFor, NgStyle } from '@angular/common';
 import { Component, OnInit, Pipe } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { from, map, of, pipe } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { authUser } from 'src/app/shared/models/interfaces/user/user.iterface';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
+import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,10 +19,12 @@ export class DashboardComponent implements OnInit {
   //variables
   totaPending!: string;
   totalDispatched!: string;
-
- 
+  userId!: any;
+  orderArray!: any;
+  orderAvailable = false;
+  totalNumberOfOrders!: number;
   //tabs
-  tabs = ['Pending', 'Dispatched', 'Cancelled'];
+  tabs = ['Pending', 'Preparing', 'Dispatched'];
   //oders
   orders = [
     {
@@ -110,36 +114,29 @@ export class DashboardComponent implements OnInit {
   activeTab!: string;
   //orders
   oders$ = of(this.orders);
+  filterOrders = of(this.orderArray);
   filteredOrders$: any = [];
 
-  constructor(private _auth: AuthServiceService) {}
+  constructor(
+    private _auth: AuthServiceService,
+    private _orderSevve: OrderServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.totalDispatched =  this.accumulateOrders('Dispatched');
+    this.totalDispatched = this.accumulateOrders('Dispatched');
     this.totaPending = this.accumulateOrders('Pending');
-   console.log('totalOrders:', this.totaPending)
     //initial tab
     this.activeTab = 'Pending';
-    this.getOrders('Pending');
-
-    this.oders$.subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (data) => {
-        console.log(data);
-      },
-    });
-
-  
-
+    // this.getOrders('Pending');
+    //get loggedin user
+    this.getUserId();
   }
 
   //seceted tab
   selectTab(tab: any) {
-    console.log(tab);
     this.activeTab = tab;
-    this.getOrders(tab);
+    this.getallOrders(tab);
   }
 
   //filter
@@ -157,13 +154,57 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  //getting number of orders
-  accumulateOrders(status: any):any {
-    const filtred = this.orders.filter((res) => res.status === status);
-    return filtred.length
+  //from firebase
+  getallOrders(orderStatu: any) {
+    if (this.orderAvailable) {
+      this.filteredOrders$ = this.orderArray.filter(
+        (product: any) => product.orderStatus === orderStatu
+      );
+    }
   }
 
+  //getting number of orders
+  accumulateOrders(status: any): any {
+    const filtred = this.orders.filter((res) => res.status === status);
+    return filtred.length;
+  }
 
-  
-  
+  //get userId
+  getUserId() {
+    this._auth.loggedInUser().subscribe((res) => {
+      console.log(res?.uid);
+      this.userId = res?.uid;
+      //calling get orders functions
+      this.getOrdersMade();
+    });
+  }
+
+  //get cart items
+  getOrdersMade() {
+    this._orderSevve.getOrders(this.userId).subscribe({
+      next: (order: any) => {
+        // Filter orders based on userId
+        this.orderArray = order.filter(
+          (order: any) => order.storeKey === this.userId
+        );
+        console.log(order);
+        if (this.orderArray.length > 0) {
+          this.orderAvailable = true;
+          this.totalNumberOfOrders = this.orderArray.length;
+
+          //getting orders
+          this.getallOrders('Pending');
+        } else {
+          this.orderAvailable = false;
+          this.totalNumberOfOrders = 0;
+        }
+      },
+    });
+  }
+
+  toOrder(id:any){
+    console.log(id)
+    this.router.navigate(['/order', id])
+     
+  }
 }

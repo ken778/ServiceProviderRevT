@@ -16,6 +16,7 @@ import {
   uploadBytes,
 } from '@angular/fire/storage';
 import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-upload.service';
+import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -42,12 +43,14 @@ export class ProfileComponent implements OnInit {
   storeAddress!: any;
   spinner = false
   storeDetails!: any;
+  user!: any;
 
   constructor(
     private _route: Router,
     private _auth: AuthServiceService,
     private storage: Storage,
-    private _storageServ: ImageUploadService
+    private _storageServ: ImageUploadService,
+    private  _toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -179,6 +182,7 @@ export class ProfileComponent implements OnInit {
         this.getStoreDetails(data?.uid);
         this.getStoreOperatingHours(data?.uid);
         this.getStoreAddress(data?.uid);
+        this.user = data
       },
       error: (error) => {
         console.log(error);
@@ -211,6 +215,15 @@ export class ProfileComponent implements OnInit {
         console.log('while fetching details', error);
       },
     });
+  }
+  deleteAccount(){
+     this.user.delete().then(() => {
+      console.log("Account deleted successfully")
+      this._toastService.presentToast( "Account deleted successfully", "success")
+      this._route.navigate(['/sign-in']);
+     }).catch((error: any)=>{
+      console.log(error)
+     })
   }
   
 }

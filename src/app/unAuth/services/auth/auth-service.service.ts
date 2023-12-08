@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { registerModule, storeAddressModule } from 'src/app/shared/models/interfaces/user/user.iterface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +20,10 @@ export class AuthServiceService {
   //variables
   isActive = false
   isVerified = false
+  spinner = false;
 
-  constructor(private database: Database, private afs: AngularFireAuth) {}
+
+  constructor(private database: Database, private afs: AngularFireAuth, private router: Router) {}
 
   //set register inputs
   setRegInputs(
@@ -34,10 +37,12 @@ export class AuthServiceService {
   }
 
   //register
-  register(email: string, password: string) {
+  register(email: string, password: string, ) {
+
     this.afs
       .createUserWithEmailAndPassword(email, password)
       .then((res:any) => {
+       
         console.log('registred', res);
         const user = res.user;
         const uid = user?.uid;
@@ -212,5 +217,11 @@ logoutUser(){
 getAllUsers(){
    
 }
+
+getSpinner(){
+  return this.spinner;
+  
+}
+
 
 }

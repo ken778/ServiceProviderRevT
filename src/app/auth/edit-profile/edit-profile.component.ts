@@ -137,10 +137,20 @@ export class EditProfileComponent  implements OnInit {
       }).catch(() => {
         this._toast.presentToast('Details not updated',  'danger');
       })
- 
+   }
 
  
-   }
+ deleteAccount(){
+  this._auth.loggedInUser().subscribe({
+    next: (res)=>{
+     console.log(res)
+    },
+    error: (error)=>{
+        console.log(error)
+    }
+      
+  })
+}
   
 
 }
