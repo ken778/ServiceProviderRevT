@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { DataSnapshot, Database, query } from '@angular/fire/database';
+import { DataSnapshot, Database, query, update } from '@angular/fire/database';
 import { BehaviorSubject, Observable, concat } from "rxjs";
 import {
  
@@ -100,5 +100,11 @@ export class OrderServiceService {
         };
       });
     }
+  }
+
+  //prepare items 
+  prepareItems(id: any, data: any) {
+    const productRef = ref(this.database, 'orders/' + id);
+    return update(productRef, data);
   }
 }

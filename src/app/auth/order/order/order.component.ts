@@ -1,6 +1,6 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -21,11 +21,14 @@ export class OrderComponent  implements OnInit {
   //variables
   orderId!: any;
   products!: any;
-  constructor(private route: ActivatedRoute, private _orderServ: OrderServiceService) { }
+  public orderObject:any;
+  orderStatus: any;
+  constructor(private route: ActivatedRoute, private _orderServ: OrderServiceService, private _route: Router) { }
 
 
   ngOnInit() {
     this.getOrderId()
+    
   }
 
     //retrieve product details
@@ -41,16 +44,42 @@ export class OrderComponent  implements OnInit {
     this._orderServ.getSingleOrder(orderId).subscribe({
       next: (order: any) => {
         console.log('order', order)
+        this.orderObject = order
+        this.orderStatus = order[0].orderStatus
         this.products = order[0].product
         console.log(this.products)
+        console.log(this.orderStatus)
        
       }
     });
   }
-  prepareOrder(){
-      console.log('preparing order')
-  }
+
+  // prepareOrder(id:any){
+   
+  //    const updataOrderData = {
+  //     description: this.products.description,
+  //     product: this.products.product,
+  //     id: this.products.id,
+  //     productId: this.products.productId,
+  //     productImage: this.products.productImage,
+  //     product_price:this.products.product_price,
+  //     quantity: this.products.quantity,
+  //     ref: this.products.ref,
+  //     status: 'PREPARING',
+  //     store_key: this.products.store_key,
+  //     total:this.products.total,
+  //     userId: this.products.userId,
+
+  //    }
+       
+  //     console.log('preparing order', id)
+  // }
 
  
 
+  toOrder(id:any){
+    console.log(id)
+    this._route.navigate(['/prepare-order', id])
+     
+  }
 }

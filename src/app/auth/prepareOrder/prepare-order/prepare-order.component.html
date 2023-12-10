@@ -1,0 +1,52 @@
+<app-header [Heading]="'Prepare Order'"></app-header>
+<ion-content>
+  <div class="container">
+    <div class="row">
+      <div class="row">
+        <div class="order-container">
+          <h3 class="text-center p-2">
+            <ion-text class="fw-bold">Order</ion-text>
+          </h3>
+          <div class="notEmpty">
+             <div class="border-container">
+              <div *ngFor="let item of products" class="mt-3 productContainer">
+                <div class="row">
+                  <div class="col col-2">
+                    <ion-avatar class="mt-2" slot="start">
+                      <img
+                        alt="Silhouette of a person's head"
+                        [src]="item.productImage"
+                      />
+                    </ion-avatar>
+                  </div>
+                  <div class="col Product-details-container">
+                    <ion-text>{{ item.name }}</ion-text>
+                    <ion-grid>
+                      <ion-row class="table-header">
+                        <ion-col>Name</ion-col>
+                        <ion-col>Quantity</ion-col>
+                        <ion-col>Amount</ion-col>
+                      </ion-row>
+                      <ion-row class="table-row">
+                        <ion-col>{{ item.product }}</ion-col>
+                        <ion-col>{{ item.quantity }}</ion-col>
+                        <ion-col>R {{ item.product_price }}</ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div *ngIf="orders" class="addButton pt-2">
+                <app-button *ngIf="currentOrderStatus==='Pending'"  (click)="prepareOrder(orders[0].id)" [class]="'w-100%'"  [title]="'prepare'"> </app-button>
+                <app-button *ngIf="currentOrderStatus==='Preparing'" (click)="dispatch(orders[0].id)" [class]="'w-100%'"  [title]="'dispatch'"> </app-button>
+                <app-button  *ngIf="currentOrderStatus==='Dispatched'"  [class]="'w-100%'"  [title]="'Dispatched'"> </app-button>
+              </div>
+             </div>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

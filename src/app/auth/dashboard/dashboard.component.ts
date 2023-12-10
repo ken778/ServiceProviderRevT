@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   orderAvailable = false;
   totalNumberOfOrders!: number;
   //tabs
-  tabs = ['Pending', 'Preparing', 'Dispatched'];
+  tabs = ['Pending', 'Preparing', 'Dispatching','Dispatched'];
   //oders
   orders = [
     {
@@ -147,6 +147,7 @@ export class DashboardComponent implements OnInit {
         next: (data) => {
           console.log(data);
           this.filteredOrders$ = data;
+         
         },
         error: (error) => {
           console.log(error);
@@ -160,12 +161,14 @@ export class DashboardComponent implements OnInit {
       this.filteredOrders$ = this.orderArray.filter(
         (product: any) => product.orderStatus === orderStatu
       );
+      this.filteredOrders$.sort((a:any, b:any) => this.filteredOrders$.indexOf(b) - this.filteredOrders$.indexOf(a));
     }
   }
 
   //getting number of orders
   accumulateOrders(status: any): any {
     const filtred = this.orders.filter((res) => res.status === status);
+    
     return filtred.length;
   }
 

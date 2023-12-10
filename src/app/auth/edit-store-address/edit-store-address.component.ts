@@ -109,7 +109,6 @@ export class EditStoreAddressComponent  implements OnInit {
 
   //assigning values 
   assignValues(lati:any,long:any, res:any){
-       
          //asign values
          this.address = res.display_name,
          this.country = this.storeAddressObject.country
@@ -123,7 +122,6 @@ export class EditStoreAddressComponent  implements OnInit {
          this.AddressLine2 = this.AddressLine2
          this.city = this.storeAddressObject.city
          this.streetName  = this.storeAddressObject.road
-
      this.addressObData = {
       address: this.address,
       country :this.country,
@@ -160,7 +158,6 @@ export class EditStoreAddressComponent  implements OnInit {
   }
   //add store details
   updatedetails(){
-    
     // console.log(this.formGroup.value)
     const storeAddressData = {
       ...this.addressObData,
@@ -171,18 +168,12 @@ export class EditStoreAddressComponent  implements OnInit {
       region:this.formGroup.get('region')?.value,
       PostalCode:this.formGroup.get('PostalCode')?.value,
       AddressLine2:this.formGroup.get('AddressLine2')?.value,
-     
     }
      this.storeAdressIntance = storeAddressData
     console.log('from instane', this.storeAdressIntance)
     //call store data in database function
     this.addStoreAdressDetails(this.userId, storeAddressData)
     // this._authServ.displaydata()
-    
- 
-
-   
-
   }
   //store store details to database
   addStoreAdressDetails(id:any, data:any) {

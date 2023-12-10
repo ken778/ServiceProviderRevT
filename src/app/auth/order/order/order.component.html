@@ -1,14 +1,11 @@
-<app-header [Heading]="'Order'"></app-header>
+<app-header [Heading]="'Order Summary'"></app-header>
 
 <ion-content>
-    <div class="container">
-         <div class="row">
-             <div class="col">
-                 
-              <div class="notEmpty">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!-- <div class="notEmpty">
                 <div *ngFor="let item of products" class="mt-3 productContainer">
-                
-                
                   <div class="row">
                     <div class="col col-2">
                       <ion-avatar class="mt-2" slot="start">
@@ -21,14 +18,14 @@
                     <div class="col Product-details-container">
                       <ion-text>{{item.name}}</ion-text>
                       <ion-grid>
-                        <!-- Header row -->
+                     
                         <ion-row class="table-header">
                           <ion-col>Name</ion-col>
                           <ion-col>Quantity</ion-col>
                           <ion-col>Amount</ion-col>
                         </ion-row>
         
-                        <!-- Data rows -->
+                       
                         <ion-row class="table-row">
                           <ion-col>{{item.product}}</ion-col>
                           <ion-col>{{item.quantity}}</ion-col>
@@ -37,14 +34,60 @@
                       </ion-grid>
                     </div>
                     <div class="col-2">
-                      <ion-button (click)="prepareOrder()" slot="end" >Prepare</ion-button>
+                      <ion-button (click)="toOrder(item.id)" slot="end" >Prepare</ion-button>
                     </div>
                     
                   </div>
               
                 </div>
+              </div> -->
+
+        <div *ngIf="orderObject" class="order-container">
+          <h3 class="text-center">
+            <ion-text class="fw-bold"> Order Summary </ion-text>
+          </h3>
+          <ion-list>
+            <ion-icon size="small" name="person-outline" slot="start"></ion-icon><ion-text class="name fw-bold"> kenneth </ion-text>
+            <br />
+            <ion-icon size="small" name="mail-outline" slot="start"></ion-icon><ion-text> kennethtumi18@gmail.com </ion-text>
+            <br />
+            <ion-icon size="small" name="call-outline" slot="start"></ion-icon><ion-text> 0769524833</ion-text>
+            <br />
+            <ion-icon size="small" name="location-outline" slot="start"></ion-icon><ion-text> 35 westrn service road 01323 </ion-text>
+          </ion-list>
+          <hr />
+          <div class="details-container">
+            <div class="details p-1">
+              <div>
+                <ion-text class="text-muted fw-bold"> Date of order </ion-text>
+                <br />
+                <ion-text>25 JAN 2023</ion-text>
               </div>
-             </div>
-         </div>
+              <div> 
+                <br />
+                <ion-text> REV-45675 </ion-text>
+              </div>
+            </div>
+            <div class="details p-1">
+              <div>
+                <ion-text class="text-muted fw-bold"> Amount Paid </ion-text>
+                <br />
+                <ion-text> R1500.00 </ion-text>
+              </div>
+              <div>
+                <ion-text class="text-muted fw-bold"> Provience</ion-text>
+                <br />
+                <ion-text> Gauteng</ion-text>
+              </div>
+            </div>
+            <div class="addButton pt-2">
+              <app-button *ngIf="orderStatus==='Pending'"  (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'Confirm'"> </app-button>
+              <app-button *ngIf="orderStatus==='Preparing'"  (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'Continue'"> </app-button>
+              <app-button *ngIf="orderStatus==='Dispatched'" (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'continue'"> </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </ion-content>

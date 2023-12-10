@@ -5,7 +5,13 @@
          font-weight: bolder;
         }
      }
+     .notEmpty{
+    
+     }
      .productContainer{
+       padding-right: 0px;
+        // margin-left: 10px;
+      
         border:1px solid #16924a;
          ion-avatar{
              img{
@@ -63,16 +69,13 @@
         flex-direction: row;
         justify-content: space-around;
       }
-      .text-muted{
-        
+
+      .border-container{
+       padding: 2%;
+        margin-left: 20px;
       }
       hr {
       
         border-top: 2px dashed #14934b;
-      }
-      ion-list{
-        ion-icon{
-          color: #14934b;
-        }
       }
 }
