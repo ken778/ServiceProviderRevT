@@ -73,7 +73,20 @@ export class PrepareOrderComponent implements OnInit {
       console.log(error)
     })
   }
+
   dispatch(id: any) {
+    this.orderStatus = "Dispatching"
+    console.log('item id', id);
+    const data = {
+      orderStatus: this.orderStatus
+    };
+    this._orderServ.prepareItems(id, data).then((res) => {
+      console.log('updated')
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+  dispatched(id: any) {
     this.orderStatus = "Dispatched"
     console.log('item id', id);
     const data = {

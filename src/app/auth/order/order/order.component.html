@@ -83,6 +83,7 @@
             <div class="addButton pt-2">
               <app-button *ngIf="orderStatus==='Pending'"  (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'Confirm'"> </app-button>
               <app-button *ngIf="orderStatus==='Preparing'"  (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'Continue'"> </app-button>
+              <app-button *ngIf="orderStatus==='Dispatching'" (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'continue'"> </app-button>
               <app-button *ngIf="orderStatus==='Dispatched'" (click)="toOrder(orderObject[0].id)" [class]="'w-100%'" [title]="'continue'"> </app-button>
             </div>
           </div>
