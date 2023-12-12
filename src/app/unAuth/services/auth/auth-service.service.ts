@@ -38,11 +38,9 @@ export class AuthServiceService {
 
   //register
   register(email: string, password: string, ) {
-
     this.afs
       .createUserWithEmailAndPassword(email, password)
       .then((res:any) => {
-       
         console.log('registred', res);
         const user = res.user;
         const uid = user?.uid;

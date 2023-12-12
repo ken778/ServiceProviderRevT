@@ -10,6 +10,7 @@ import {Database,set,ref,update, onValue} from '@angular/fire/database'
 import { authUser, registerModule } from 'src/app/shared/models/interfaces/user/user.iterface';
 import { NgIf } from '@angular/common';
 import { ToastService } from '../services/toast/toast.service';
+import { fchmod } from 'fs';
 
 @Component({
   selector: 'app-sign-up',
@@ -93,6 +94,12 @@ export class SignUpComponent  implements OnInit {
     }
    
 }
+
+
+
+
+
+
 toLogin(){
   this._router.navigate(['/sign-in'])
 }

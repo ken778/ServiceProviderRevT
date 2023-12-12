@@ -11,6 +11,7 @@ export class registerModule {
   city?: string;
 }
 
+
 export class storeAddressModule {
   AddressLine2?:string ;
   PostalCode?:string ;
@@ -24,5 +25,4 @@ export class storeAddressModule {
   isoCountryCode?:string;
   name?:string;
   streetNumber?:string;
- 
 }
