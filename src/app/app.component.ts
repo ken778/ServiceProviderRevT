@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthServiceService } from './unAuth/services/auth/auth-service.service';
 import { Router } from '@angular/router';
+import { StatusbarService } from './unAuth/services/statusbar/statusbar.service';
 
 
 @Component({
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private authSer: AuthServiceService, private router: Router) {
-    
+  constructor(private authSer: AuthServiceService, private router: Router, private _statusbar : StatusbarService) {
+    this._statusbar.applyBackgroundColor();
     this.authSer.loggedInUser().subscribe({
       next:(user)=>{
        console.log( user)

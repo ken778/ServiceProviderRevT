@@ -7,6 +7,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
 import { authUser } from 'src/app/shared/models/interfaces/user/user.iterface';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +18,9 @@ import { OrderServiceService } from 'src/app/unAuth/services/orders/order-servic
 })
 export class DashboardComponent implements OnInit {
   //variables
-  totaPending!: string;
-  totalDispatched!: string;
+  totaPending!: any;
+  totalDispatched!: any;
+  preparing!: any
   userId!: any;
   orderArray!: any;
   orderAvailable = false;
@@ -120,12 +122,14 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _auth: AuthServiceService,
     private _orderSevve: OrderServiceService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private _statusbar : StatusbarService
+  ) {
+   
+  }
 
   ngOnInit() {
-    this.totalDispatched = this.accumulateOrders('Dispatched');
-    this.totaPending = this.accumulateOrders('Pending');
+  
     //initial tab
     this.activeTab = 'Pending';
     // this.getOrders('Pending');
@@ -167,10 +171,12 @@ export class DashboardComponent implements OnInit {
 
   //getting number of orders
   accumulateOrders(status: any): any {
-    const filtred = this.orders.filter((res) => res.status === status);
+    const filtred = this.orderArray.filter((res:any) => res.orderStatus === status);
     
     return filtred.length;
   }
+
+ 
 
   //get userId
   getUserId() {
@@ -179,6 +185,11 @@ export class DashboardComponent implements OnInit {
       this.userId = res?.uid;
       //calling get orders functions
       this.getOrdersMade();
+      //accumulate totals
+      // this.totalDispatched = this.accumulateOrders('Dispatched');
+      // this.totaPending = this.accumulateOrders('Pending');
+
+     
     });
   }
 
@@ -197,6 +208,13 @@ export class DashboardComponent implements OnInit {
 
           //getting orders
           this.getallOrders('Pending');
+
+          //accumulate
+     
+         this.totaPending = this.accumulateOrders('Pending')
+         this.totalDispatched =  this.accumulateOrders('Dispatched')
+         this.preparing =  this.accumulateOrders('Preparing')
+
         } else {
           this.orderAvailable = false;
           this.totalNumberOfOrders = 0;

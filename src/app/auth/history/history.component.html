@@ -5,10 +5,15 @@
           <div class="col">
             <div *ngIf="!orderAvailable" class="empty">
               <div class="empty-text text-center p-4">
-                <h2>Your History is empty.</h2>
-                <p>No purchased items yet.</p>
+                <h2><ion-text>Your History is empty.</ion-text></h2>
+                <p><ion-text>No purchased items yet.</ion-text></p>
               </div>
             </div>
+          </div>
+          <div class="totl-order-container p-3">
+               <h4>
+                  <ion-text>Total orders: {{totalNumberOfOrders}}</ion-text>
+               </h4>
           </div>
           <div class="scrollable">
             <ion-list>

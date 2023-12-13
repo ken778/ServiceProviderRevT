@@ -17,6 +17,8 @@ import { Filesystem, Directory, Encoding, ReadFileOptions } from '@capacitor/fil
 const pdfMake = require('pdfmake/build/pdfmake.js');
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { WriteFileOptions } from 'fs';
+import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
+import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -33,14 +35,25 @@ export class ReportsComponent implements OnInit {
     private fb: FormBuilder,
     private plt: Platform,
     private http: HttpClient,
-    private fileOpener: FileOpener
-  ) {}
+    private fileOpener: FileOpener,
+    private _auth: AuthServiceService,
+    private _orderSevve: OrderServiceService,
+  ) {
+    this.getUserId()
+  }
 
   myForm!: FormGroup;
   pdfObj!: any;
   base64Image = null;
   photoPreview = null;
   logoData: any;
+
+  userId!: any;
+  orderArray!: any;
+  orderAvailable = false;
+  totalNumberOfOrders!: number;
+
+  month!: any;
 
   textArray = [
     'Text for the first row of the table1.',
@@ -97,6 +110,7 @@ export class ReportsComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log('report report')
     this.myForm = this.fb.group({
       showLogo: true,
       from: 'kenneth',
@@ -111,6 +125,46 @@ export class ReportsComponent implements OnInit {
 
     Filesystem.requestPermissions();
   }
+
+      //get userId
+      getUserId() {
+        this._auth.loggedInUser().subscribe((res) => {
+          console.log(res?.uid);
+          this.userId = res?.uid;
+          //calling get orders functions
+          this.getOrdersMade();
+        });
+      }
+    
+    //get cart items
+    getOrdersMade() {
+      this._orderSevve.getOrders(this.userId).subscribe({
+        next: (order: any) => {
+          // Filter orders based on userId
+          this.orderArray = order.filter(
+            (order: any) => order.storeKey === this.userId
+          );
+          console.log(this.orderArray);
+
+          //testing 
+          console.log(this.orderArray[2].created_at.toLocaleString('en-US', { month: 'short' }))
+          const date = new Date(this.orderArray[2].created_at);
+          const monthString = date.toLocaleString('en-US', { month: 'short' });
+          
+          console.log(monthString);
+          this.orderArray.sort((a:any, b:any) => this.orderArray.indexOf(b) - this.orderArray.indexOf(a));
+          if (this.orderArray.length > 0) {
+            this.orderAvailable = true;
+            this.totalNumberOfOrders = this.orderArray.length;
+            // //getting orders
+            // this.getallOrders('Pending');
+          } else {
+            this.orderAvailable = false;
+            this.totalNumberOfOrders = 0;
+          }
+        },
+      });
+    }
 
   loadLocalAssetsToBase64() {
     this.http
@@ -285,9 +339,7 @@ export class ReportsComponent implements OnInit {
       this.pdfObj.download();
     }
   }
-
-
-
+  //write file
    writeSecretFile = async()=>{
        
         if(window.confirm(' do you want to create file')){
@@ -309,14 +361,26 @@ export class ReportsComponent implements OnInit {
         }
   };
 
+  //create PDF
   createAndDownload(){
     this.createPdf()
     this.downloadPdf()
   }
 
   getreport(event: any) {
-    console.log(event.target.value);
+    console.log(event.target.value);  
+    const date = new Date(event.target.value);
+    const monthString = date.toLocaleString('en-US', { month: 'short' });
+    console.log(monthString);
+    this.month = monthString;
   }
+
+  //filter orders based on month
+  filterorderByMonth(month:any, ordersArray:any){
+      
+  }
+
+  //navigate
   navigateToPdf() {
     this._Route.navigate(['/print-report']);
   }
