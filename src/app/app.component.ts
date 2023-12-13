@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthServiceService } from './unAuth/services/auth/auth-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private authSer: AuthServiceService, private router: Router) {
+    
+    this.authSer.loggedInUser().subscribe({
+      next:(user)=>{
+       console.log( user)
+       if(user){
+           this.router.navigate(['/home'])
+       }else{
+        this.router.navigate(['/sign-in'])
+       }
+      }
+    })
+  }
 }

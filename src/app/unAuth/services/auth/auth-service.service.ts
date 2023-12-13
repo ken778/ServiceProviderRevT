@@ -75,6 +75,10 @@ export class AuthServiceService {
   loggedInUser(){
     return this.afs.authState;
   }
+
+  stillLoogedIn(){
+    return this.afs.onAuthStateChanged;
+  }
   
   //get sinfle user details
   getUser(uid:any): Observable<any> {

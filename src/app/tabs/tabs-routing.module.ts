@@ -6,6 +6,7 @@ import { ProductsComponent } from '../auth/products/products.component';
 import { ReportsComponent } from '../auth/reports/reports.component';
 import { MessageComponent } from '../auth/message/message.component';
 import { ProfileComponent } from '../auth/profile/profile.component';
+import { HistoryComponent } from '../auth/history/history.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,15 @@ const routes: Routes = [
               {
                   path: '',
                  component: ProfileComponent
+              }
+          ]
+      },
+      {
+          path: 'history',
+          children: [
+              {
+                  path: '',
+                 component: HistoryComponent
               }
           ]
       },

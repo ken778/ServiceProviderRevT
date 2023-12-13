@@ -1,0 +1,38 @@
+<app-header [Heading]="'History'"></app-header>
+<ion-content>
+  <div class="container">
+       <div class="row">
+          <div class="col">
+            <div *ngIf="!orderAvailable" class="empty">
+              <div class="empty-text text-center p-4">
+                <h2>Your History is empty.</h2>
+                <p>No purchased items yet.</p>
+              </div>
+            </div>
+          </div>
+          <div class="scrollable">
+            <ion-list>
+                
+              <ion-item (click)="toOrder(item.id)" *ngFor="let item of orderArray" class="order-details mx-auto mt-2" >
+                <ion-item class="order-detail"   lines="none">
+             
+                  <div class="icon">
+                    <ion-icon size="large" name="person-outline" slot="start"></ion-icon>
+                  </div>
+                  <div class="details">
+                    <div class="names">
+                      <ion-text>{{item.customerName}}</ion-text>
+                    </div>
+                    <div class="inner-details">
+                      <ion-text>{{item.orderID}}</ion-text>
+                      <ion-text>{{item.province}}</ion-text>
+                      <ion-text>R {{item.amount}}</ion-text>
+                    </div>
+                  </div>
+                </ion-item>
+              </ion-item>
+            </ion-list>
+          </div>
+       </div>
+  </div>
+</ion-content>

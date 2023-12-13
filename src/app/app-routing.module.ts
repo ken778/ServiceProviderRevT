@@ -18,6 +18,8 @@ import { EditProfileComponent } from './auth/edit-profile/edit-profile.component
 import { AddProductComponent } from './auth/add-product/add-product.component';
 import { OrderComponent } from './auth/order/order/order.component';
 import { PrepareOrderComponent } from './auth/prepareOrder/prepare-order/prepare-order.component';
+import { HistoryComponent } from './auth/history/history.component';
+import { OrderDetailsComponent } from './auth/order-details/order-details.component';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'sign-in',
@@ -74,7 +76,13 @@ const routes: Routes = [
     path: 'prepare-order/:id', component: PrepareOrderComponent
   },
   {
+    path: 'order-details/:id', component: OrderDetailsComponent
+  },
+  {
     path: 'add-product', component: AddProductComponent
+  },
+  {
+    path: 'history', component: HistoryComponent
   },
   {
     path: 'home',

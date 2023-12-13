@@ -61,6 +61,7 @@ export class PrepareOrderComponent implements OnInit {
       },
     });
   }
+  
   prepareOrder(id: any) {
     this.orderStatus = "Preparing"
     console.log('item id', id);

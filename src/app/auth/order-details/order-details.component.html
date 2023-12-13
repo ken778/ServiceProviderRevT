@@ -1,0 +1,56 @@
+<app-header [Heading]="'Order summary'"></app-header>
+<ion-content>
+    <div class="conatainer">
+         <div class="row">
+             <div class="col">
+              <div *ngIf="orders" class="order-container">
+                <h3 class="text-center">
+                  <ion-text class="fw-bold"> Order Summary </ion-text>
+                </h3>
+                <ion-list>
+                  <ion-icon size="small" name="person-outline" slot="start"></ion-icon><ion-text class="name fw-bold"> {{orders.customerName}} </ion-text>
+                  <br />
+                  <ion-icon size="small" name="mail-outline" slot="start"></ion-icon><ion-text> kennethtumi18@gmail.com </ion-text>
+                  <br />
+                  <ion-icon size="small" name="call-outline" slot="start"></ion-icon><ion-text> {{orders.phoneNumber}}</ion-text>
+                  <br />
+                  <ion-icon size="small" name="location-outline" slot="start"></ion-icon><ion-text>{{orders.delivery_address}}</ion-text>
+                </ion-list>
+                <hr />
+                <div class="details-container">
+                  <ion-badge color="success">{{orders.orderStatus}}</ion-badge>
+                  <div class="details p-1">
+                    <div>
+                      <ion-text class="text-muted fw-bold"> Date of order </ion-text>
+                      <br />
+                      <ion-text>{{orders.created_at}}</ion-text>
+                    </div>
+                    <div> 
+                      <ion-text class="text-muted fw-bold"> Order ID </ion-text>
+                      <br />
+                      <ion-text>{{orders.orderID}}</ion-text>
+                    </div>
+                  </div>
+                  <div class="details p-1">
+                    <div>
+                      <ion-text class="text-muted fw-bold"> Amount Paid </ion-text>
+                      <br />
+                      <ion-text>R {{orders.amount}}</ion-text>
+                    </div>
+                    <div>
+                      <ion-text class="text-muted fw-bold"> Provience</ion-text>
+                      <br />
+                      <ion-text>{{orders.province}}</ion-text>
+                    </div>
+                  </div>
+                
+                  <div class="addButton pt-2 mt-4">
+                    <app-button (click)="goBack()"  [class]="'w-100%'" [title]="'back'"> </app-button>
+            
+                  </div>
+                </div>
+              </div>
+             </div>
+         </div>
+    </div>
+</ion-content>

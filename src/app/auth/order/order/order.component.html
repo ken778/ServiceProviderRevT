@@ -47,37 +47,39 @@
             <ion-text class="fw-bold"> Order Summary </ion-text>
           </h3>
           <ion-list>
-            <ion-icon size="small" name="person-outline" slot="start"></ion-icon><ion-text class="name fw-bold"> kenneth </ion-text>
+            <ion-icon size="small" name="person-outline" slot="start"></ion-icon><ion-text class="name fw-bold"> {{orderObject[0].customerName}} </ion-text>
             <br />
             <ion-icon size="small" name="mail-outline" slot="start"></ion-icon><ion-text> kennethtumi18@gmail.com </ion-text>
             <br />
-            <ion-icon size="small" name="call-outline" slot="start"></ion-icon><ion-text> 0769524833</ion-text>
+            <ion-icon size="small" name="call-outline" slot="start"></ion-icon><ion-text> {{orderObject[0].phoneNumber}}</ion-text>
             <br />
-            <ion-icon size="small" name="location-outline" slot="start"></ion-icon><ion-text> 35 westrn service road 01323 </ion-text>
+            <ion-icon size="small" name="location-outline" slot="start"></ion-icon><ion-text>{{orderObject[0].delivery_address}}</ion-text>
           </ion-list>
           <hr />
           <div class="details-container">
+            <ion-badge color="success">{{orderObject[0].orderStatus}}</ion-badge>
             <div class="details p-1">
               <div>
                 <ion-text class="text-muted fw-bold"> Date of order </ion-text>
                 <br />
-                <ion-text>25 JAN 2023</ion-text>
+                <ion-text>{{orderObject[0].created_at}}</ion-text>
               </div>
               <div> 
+                <ion-text class="text-muted fw-bold"> Order ID </ion-text>
                 <br />
-                <ion-text> REV-45675 </ion-text>
+                <ion-text>{{orderObject[0].orderID}}</ion-text>
               </div>
             </div>
             <div class="details p-1">
               <div>
                 <ion-text class="text-muted fw-bold"> Amount Paid </ion-text>
                 <br />
-                <ion-text> R1500.00 </ion-text>
+                <ion-text>R {{orderObject[0].amount}}</ion-text>
               </div>
               <div>
                 <ion-text class="text-muted fw-bold"> Provience</ion-text>
                 <br />
-                <ion-text> Gauteng</ion-text>
+                <ion-text>{{orderObject[0].province}}</ion-text>
               </div>
             </div>
             <div class="addButton pt-2">
