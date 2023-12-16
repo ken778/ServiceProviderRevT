@@ -27,16 +27,31 @@
           [type]="'password'"
           [control]="formGroup.controls.password"
         ></app-input>
-        <div class="button mt-4">
+        <div class="forgot-pass-container pt-3">
+             <ion-text class="text-success">
+              <p class="forget-text pb-2" [routerLink]="['/recover']">
+                Forgot Password?
+              </p>
+             </ion-text>
+        </div>
+        <div class="forgot-pass-container pt-3">
+          <ion-text>
+            <h6 class="sign-up"  (click)="toSignUp()">
+              Don't have an account? <ion-text class="text-success">Sign up</ion-text>
+            </h6>
+        </ion-text>
+        </div>
+       
+        <div class="button mt-5">
           <app-button (click)="login()" [title]="'LOGIN'"></app-button>
         </div>
-        <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
+        <!-- <div class="have-account-redirect text-center pt-4 mt-5 p-3">
           <ion-text>
-              <h6 (click)="toSignUp()">
+              <h6  (click)="toSignUp()">
                 Don't have an account? <ion-text class="text-success">Sign up</ion-text>
               </h6>
           </ion-text>
-      </div>
+      </div> -->
       </div>
     </div>
   </div>

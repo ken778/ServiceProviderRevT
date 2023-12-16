@@ -40,7 +40,7 @@
               <div *ngIf="orders" class="addButton pt-2">
                 <app-button *ngIf="currentOrderStatus==='Pending'"  (click)="prepareOrder(orders[0].id)" [class]="'w-100%'"  [title]="'prepare'"> </app-button>
                 <app-button *ngIf="currentOrderStatus==='Preparing'" (click)="dispatch(orders[0].id)" [class]="'w-100%'"  [title]="'dispatch'"> </app-button>
-                <app-button  *ngIf="currentOrderStatus==='Dispatching'" (click)="dispatched(orders[0].id)" [class]="'w-100%'"  [title]="'Dispatched'"></app-button>
+                <app-button  *ngIf="currentOrderStatus==='Dispatching'" (click)="dispatched(orders[0].id)" [class]="'w-100%'"  [title]="'Complete order'"></app-button>
                 <app-button  *ngIf="currentOrderStatus==='Dispatched'"  [class]="'w-100%'"  [title]="'order Delivered'"> </app-button>
               </div>
              </div>

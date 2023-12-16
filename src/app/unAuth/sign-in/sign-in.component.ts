@@ -10,7 +10,7 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { InputComponent } from 'src/app/shared/components/input/input.component';
 import { AuthServiceService } from '../services/auth/auth-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ToastService } from '../services/toast/toast.service';
 
@@ -25,6 +25,7 @@ import { ToastService } from '../services/toast/toast.service';
     ButtonComponent,
     FooterComponent,
     NgIf,
+    RouterLink
   ],
 })
 export class SignInComponent implements OnInit {
@@ -60,6 +61,7 @@ export class SignInComponent implements OnInit {
           //Signed in
           const user = userCredential.user;
           console.log(user);
+          localStorage.setItem('user', JSON.stringify(user));
 
           setTimeout(() => {
             this.router.navigate(['/home']);

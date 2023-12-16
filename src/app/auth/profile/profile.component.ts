@@ -194,6 +194,7 @@ export class ProfileComponent implements OnInit {
   logout() {
     this._auth.loggedInUser().subscribe({
       next: () => {
+        localStorage.removeItem('user')
         this._route.navigate(['/sign-in']);
       },
     });

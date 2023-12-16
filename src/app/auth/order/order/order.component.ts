@@ -1,4 +1,4 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -8,22 +8,28 @@ import { InputComponent } from 'src/app/shared/components/input/input.component'
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area.component';
 import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
+import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss'],
   standalone:true,
-  imports:[IonicModule, CommonModule, NgIf,NgFor, ModalComponent, HeaderComponent, InputComponent, ButtonComponent, TextAreaComponent]
+  imports:[IonicModule, CommonModule, NgIf,NgFor, ModalComponent, HeaderComponent, InputComponent, ButtonComponent, TextAreaComponent, NgClass]
 })
 export class OrderComponent  implements OnInit {
 
+  cancelButton = {
+   '--background':'#ff7251',
+    'height':'40px ',
+    
+  }
   //variables
   orderId!: any;
   products!: any;
   public orderObject:any;
   orderStatus: any;
-  constructor(private route: ActivatedRoute, private _orderServ: OrderServiceService, private _route: Router) { }
+  constructor(private route: ActivatedRoute, private _orderServ: OrderServiceService, private _route: Router, private  _toastService: ToastService) { }
 
 
   ngOnInit() {
@@ -81,5 +87,20 @@ export class OrderComponent  implements OnInit {
     console.log(id)
     this._route.navigate(['/prepare-order', id])
      
+  }
+
+  cancel(id: any) {
+    this.orderStatus = "Cancelled"
+    console.log('item id', id);
+    const data = {
+      orderStatus: this.orderStatus
+    };
+    this._orderServ.prepareItems(id, data).then((res) => {
+      console.log('updated')
+      this._toastService.presentToast( "Order cancelled", "success")
+       this._route.navigate(['/home'])
+    }).catch((error)=>{
+      console.log(error)
+    })
   }
 }

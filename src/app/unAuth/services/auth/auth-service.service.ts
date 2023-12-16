@@ -52,6 +52,10 @@ export class AuthServiceService {
       });
   }
 
+  forgotPassword(email:any){
+      return this.afs.sendPasswordResetEmail(email)
+  }
+
   //store new user data to database
   addNewUser(uid: any, user:any) {
     let data = {...this.registerEmailInstance,

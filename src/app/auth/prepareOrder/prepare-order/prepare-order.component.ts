@@ -1,6 +1,6 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -8,6 +8,7 @@ import { InputComponent } from 'src/app/shared/components/input/input.component'
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area.component';
 import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
+import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
   selector: 'app-prepare-order',
@@ -34,7 +35,8 @@ export class PrepareOrderComponent implements OnInit {
   buttonDisabled = true;
   constructor(
     private route: ActivatedRoute,
-    private _orderServ: OrderServiceService
+    private _orderServ: OrderServiceService,
+    private _route: Router, private  _toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -70,6 +72,8 @@ export class PrepareOrderComponent implements OnInit {
     };
     this._orderServ.prepareItems(id, data).then((res) => {
       console.log('updated')
+      this._toastService.presentToast( "Preparing order", "success")
+      this._route.navigate(['/home'])
     }).catch((error)=>{
       console.log(error)
     })
@@ -83,6 +87,8 @@ export class PrepareOrderComponent implements OnInit {
     };
     this._orderServ.prepareItems(id, data).then((res) => {
       console.log('updated')
+      this._toastService.presentToast( "Order out for delivery", "success")
+      this._route.navigate(['/home'])
     }).catch((error)=>{
       console.log(error)
     })
@@ -95,6 +101,8 @@ export class PrepareOrderComponent implements OnInit {
     };
     this._orderServ.prepareItems(id, data).then((res) => {
       console.log('updated')
+      this._toastService.presentToast( "Order completed", "success")
+      this._route.navigate(['/home'])
     }).catch((error)=>{
       console.log(error)
     })

@@ -49,16 +49,23 @@
           [type]="'password'"
           [control]="formGroup.controls.password"
         ></app-input>
+        <div class="forgot-pass-container pt-3">
+          <ion-text>
+            <h6 class="sign-up" >
+              Already have an account? <ion-text class="text-success"><a [routerLink]="['/sign-in']">Sign in</a></ion-text>
+            </h6>
+        </ion-text>
+        </div>
         <div class="button mt-4">
           <app-button (click)="signUp()"  [title]="'REGISTER'"></app-button>
         </div>
-        <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
+        <!-- <div class="have-account-redirect text-center pt-4 fixed-bottom p-3">
             <ion-text>
                 <h6>
                    Already have an account? <ion-text class="text-success"><a [routerLink]="['/sign-in']">Sign in</a></ion-text>
                 </h6>
             </ion-text>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

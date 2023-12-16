@@ -20,6 +20,7 @@ import { OrderComponent } from './auth/order/order/order.component';
 import { PrepareOrderComponent } from './auth/prepareOrder/prepare-order/prepare-order.component';
 import { HistoryComponent } from './auth/history/history.component';
 import { OrderDetailsComponent } from './auth/order-details/order-details.component';
+import { ForgotPasswordComponent } from './unAuth/forgot-password/forgot-password/forgot-password.component';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'sign-in',
@@ -83,6 +84,9 @@ const routes: Routes = [
   },
   {
     path: 'history', component: HistoryComponent
+  },
+  {
+    path: 'recover', component: ForgotPasswordComponent
   },
   {
     path: 'home',
