@@ -1,35 +1,39 @@
 <app-header [Heading]="'Profile'"></app-header>
 <ion-content>
-  <div >
-    <div class="row justify-content-center ">
+  <div>
+    <div class="row justify-content-center">
       <div class="col col-md-6 mt-md-5 pt-md-5">
         <div class="spinner-overlay" *ngIf="spinner">
           <ion-spinner color="success" name="lines"></ion-spinner>
         </div>
-        
-     
-     
-         <div class="profile-picture-container">
+
+        <div class="profile-picture-container">
           <div lines="none" class="card m-2 p-2">
             <div class="avatar justify-content-center">
               <ion-avatar>
                 <img *ngIf="userInfo" [src]="userInfo.imageUrl" />
-                <img *ngIf="!userInfo"  src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    
+                <img
+                  *ngIf="!userInfo"
+                  src="https://ionicframework.com/docs/img/demos/avatar.svg"
+                />
               </ion-avatar>
               <ion-icon (click)="editProfile()" name="create"></ion-icon>
             </div>
-            <ion-item lines="none" class="profile-banner ion-text-center p-2 mt-2">
-              <ion-text class="" *ngIf="userInfo">{{userInfo.first_name}} {{userInfo.last_name}}</ion-text>
+            <ion-item
+              lines="none"
+              class="profile-banner ion-text-center p-2 mt-2"
+            >
+              <ion-text class="" *ngIf="userInfo"
+                >{{ userInfo.first_name }} {{ userInfo.last_name }}</ion-text
+              >
             </ion-item>
-
           </div>
-        
-         </div>
+        </div>
 
         <div class="farmName">
-          <ion-text *ngIf="storeDetails"  class="p-3"
-            ><ion-icon name="storefront-outline"></ion-icon> {{storeDetails.store_name}}</ion-text
+          <ion-text *ngIf="storeDetails" class="p-3"
+            ><ion-icon name="storefront-outline"></ion-icon>
+            {{ storeDetails.store_name }}</ion-text
           >
         </div>
         <div class="cards">
@@ -37,10 +41,10 @@
             <ion-list>
               <ion-label>Store Details</ion-label>
               <div *ngIf="storeDetails" class="div">
-                <ion-text>{{storeDetails.office_no_1 }}</ion-text><br />
-                <ion-text>{{storeDetails.email_address}}</ion-text>
+                <ion-text>{{ storeDetails.office_no_1 }}</ion-text
+                ><br />
+                <ion-text>{{ storeDetails.email_address }}</ion-text>
               </div>
-            
             </ion-list>
             <ion-button slot="end" (click)="editContacts()"> EDIT </ion-button>
           </ion-item>
@@ -48,16 +52,24 @@
             <ion-list>
               <ion-label>Operation</ion-label>
               <div class="div" *ngIf="operatingHours">
-                <ion-text>Weekdays: {{operatingHours.weekdaysStartTime}} -  {{operatingHours.weekdaysEndTime}}</ion-text><br />
-                <ion-text>Saturday:  {{operatingHours.saturdaysStartTime}} -  {{operatingHours.saturdaysEndTime}}</ion-text><br />
-                <ion-text>Sunday: {{operatingHours.sundaysStartTime}} -  {{operatingHours.sundaysEndTime}}</ion-text>
+                <ion-text
+                  >Weekdays: {{ operatingHours.weekdaysStartTime }} -
+                  {{ operatingHours.weekdaysEndTime }}</ion-text
+                ><br />
+                <ion-text
+                  >Saturday: {{ operatingHours.saturdaysStartTime }} -
+                  {{ operatingHours.saturdaysEndTime }}</ion-text
+                ><br />
+                <ion-text
+                  >Sunday: {{ operatingHours.sundaysStartTime }} -
+                  {{ operatingHours.sundaysEndTime }}</ion-text
+                >
               </div>
               <div class="div" *ngIf="!operatingHours">
                 <ion-text>Weekdays:</ion-text><br />
                 <ion-text>Saturday: </ion-text><br />
                 <ion-text>Sunday: </ion-text>
               </div>
-             
             </ion-list>
             <ion-button
               slot="end"
@@ -70,23 +82,39 @@
           <ion-item lines="none" class="card m-2">
             <ion-list>
               <ion-label>Store Address</ion-label>
-          
+
               <div class="div" *ngIf="storeAddress">
-                <ion-text>{{storeAddress.address}}</ion-text><br />
+                <ion-text>{{ storeAddress.address }}</ion-text
+                ><br />
               </div>
-            
             </ion-list>
-            <ion-button
-              slot="end"
-              id="open-modal"
-              (click)="editStoreAddress()"
-            >
+            <ion-button slot="end" id="open-modal" (click)="editStoreAddress()">
               EDIT
             </ion-button>
-           
           </ion-item>
-          <ion-button class="logout-button" color="danger" expand="block" (click)="logout()">logout</ion-button>
-          <ion-button class="logout-button" color="danger" expand="block" (click)="deleteAccount()">Delete Account</ion-button>
+          <ion-button
+            class="logout-button"
+            color="danger"
+            expand="block"
+            (click)="logout()"
+            >logout</ion-button
+          >
+          <ion-button
+          id="present-alert"
+            class="logout-button"
+            color="danger"
+            expand="block"
+            (click)="deleteAccount()"
+            >Delete Account</ion-button
+          >
+          <!-- <ion-button id="present-alert">Click Me</ion-button> -->
+          <ion-alert
+            trigger="present-alert"
+            header="Delete Account"
+            message="Are you sure you want to delete your account?!"
+            [buttons]="alertButtons"
+        
+          ></ion-alert>
         </div>
       </div>
     </div>

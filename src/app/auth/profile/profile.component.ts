@@ -226,5 +226,22 @@ export class ProfileComponent implements OnInit {
       console.log(error)
      })
   }
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      deleteAccount: () => {
+        this._toastService.presentToast( "Account deleted successfully", "success")
+      },
+    },
+  ];
+
   
 }
