@@ -17,6 +17,7 @@ import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-up
 import { ProductService } from 'src/app/unAuth/services/product/product.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-products',
@@ -77,8 +78,9 @@ export class ProductsComponent implements OnInit {
   Category = of(Category);
   imageSource!:any;
   imageUrl!:any;
-  constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router) {
+  constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router,private _statusbar : StatusbarService) {
     this.getLoogedInUser()
+    this._statusbar.applyBackgroundColor();
   }
 
   ngOnInit() {}

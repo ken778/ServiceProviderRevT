@@ -7,6 +7,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
 import { InputComponent } from 'src/app/shared/components/input/input.component';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
@@ -38,8 +39,9 @@ export class EditOperationHoursComponent implements OnInit {
 
 
 
-  constructor(private _auth:AuthServiceService, private _toast: ToastService) {
+  constructor(private _auth:AuthServiceService, private _toast: ToastService,private _statusbar : StatusbarService) {
     this.getUserId()
+    this._statusbar.applyBackgroundColor();
   }
 
   // operationHours$ = of(this.operationHours);

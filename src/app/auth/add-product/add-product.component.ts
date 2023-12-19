@@ -17,6 +17,7 @@ import { ProductService } from 'src/app/unAuth/services/product/product.service'
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 import { DropdownInputComponent } from 'src/app/shared/components/dropdown-input/dropdown-input.component';
 import { categories } from 'src/app/shared/product-objects/product-objects';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-add-product',
@@ -54,8 +55,9 @@ export class AddProductComponent  implements OnInit {
       category: new FormControl('', [Validators.required]),
     });
 
-    constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router) {
+    constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router, private _statusbar : StatusbarService) {
       this.getLoogedInUser()
+      this._statusbar.applyBackgroundColor();
     }
 
   ngOnInit() {}

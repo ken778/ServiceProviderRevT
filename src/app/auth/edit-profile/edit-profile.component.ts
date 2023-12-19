@@ -10,6 +10,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area.component';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-upload.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
@@ -39,7 +40,9 @@ export class EditProfileComponent  implements OnInit {
     'width': '200px',
   }
 
-  constructor( private _auth: AuthServiceService, private _toast: ToastService, private _storageServ: ImageUploadService) { }
+  constructor( private _auth: AuthServiceService, private _toast: ToastService, private _storageServ: ImageUploadService,private _statusbar : StatusbarService) {
+    this._statusbar.applyBackgroundColor();
+   }
   formGroup = new FormGroup({
     first_name:new FormControl('', [Validators.required]),
     last_name:new FormControl('', [Validators.required]),

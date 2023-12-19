@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  storeAddressModule } from 'src/app/shared/models/interfaces/user/user.iterface';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 
 @Component({
@@ -48,7 +49,9 @@ export class EditStoreAddressComponent  implements OnInit {
    userId!:any;
    storeAdress:any;
 
-  constructor(private geolocation: Geolocation, private  _locService: LocationService, private _authServ: AuthServiceService, private _toast:ToastService) { }
+  constructor(private geolocation: Geolocation, private  _locService: LocationService, private _authServ: AuthServiceService, private _toast:ToastService,private _statusbar : StatusbarService) { 
+    this._statusbar.applyBackgroundColor();
+  }
 
   formGroup = new FormGroup({
     street:new FormControl('', [Validators.required]),
@@ -66,7 +69,7 @@ export class EditStoreAddressComponent  implements OnInit {
   }
 
   private fillUserAddressWithUserCurrentPosition(){
-    this.geolocation.getCurrentPosition().then((position) => {
+    this.geolocation.getCurrentPosition().then((position:any) => {
         //  console.log(position)
          //asign cordinates
          this.latitude = position.coords.latitude;

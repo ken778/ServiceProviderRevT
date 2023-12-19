@@ -12,6 +12,7 @@ import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area
 import { categories } from 'src/app/shared/product-objects/product-objects';
 import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-upload.service';
 import { ProductService } from 'src/app/unAuth/services/product/product.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-product-details',
@@ -38,7 +39,9 @@ export class ProductDetailsComponent  implements OnInit {
     category: new FormControl('', [Validators.required]),
   });
 
-  constructor(private route: ActivatedRoute, private _productServ: ProductService,private _storageServ: ImageUploadService,private _router: Router) { }
+  constructor(private route: ActivatedRoute, private _productServ: ProductService,private _storageServ: ImageUploadService,private _router: Router,private _statusbar : StatusbarService) { 
+    this._statusbar.applyBackgroundColor();
+  }
 
   ngOnInit() {
     this.getProductDetails()

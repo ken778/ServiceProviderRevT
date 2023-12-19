@@ -10,6 +10,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area.component';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-history',
@@ -40,7 +41,10 @@ export class HistoryComponent  implements OnInit {
 
   constructor(  private _auth: AuthServiceService,
     private _orderSevve: OrderServiceService,
-    private router: Router) { }
+    private router: Router,private _statusbar : StatusbarService) { 
+      this._statusbar.applyBackgroundColor();
+
+    }
 
   ngOnInit() {
     this.getUserId()

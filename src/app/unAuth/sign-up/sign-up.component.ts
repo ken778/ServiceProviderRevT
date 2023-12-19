@@ -11,6 +11,7 @@ import { authUser, registerModule } from 'src/app/shared/models/interfaces/user/
 import { NgIf } from '@angular/common';
 import { ToastService } from '../services/toast/toast.service';
 import { fchmod } from 'fs';
+import { StatusbarService } from '../services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -38,7 +39,10 @@ export class SignUpComponent  implements OnInit {
     password:new FormControl('', [Validators.required]),
   })
 
-  constructor(private _auth: AuthServiceService,private database: Database, private _router: Router, private _toastServ: ToastService) { }
+  constructor(private _auth: AuthServiceService,private database: Database, private _router: Router, private _toastServ: ToastService, private _statusbar : StatusbarService
+    ) {
+      this._statusbar.applyBackgroundColor();
+     }
 
   ngOnInit() {
     

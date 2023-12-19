@@ -19,6 +19,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { WriteFileOptions } from 'fs';
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { OrderServiceService } from 'src/app/unAuth/services/orders/order-service.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,7 +39,9 @@ export class ReportsComponent implements OnInit {
     private fileOpener: FileOpener,
     private _auth: AuthServiceService,
     private _orderSevve: OrderServiceService,
+    private _statusbar : StatusbarService
   ) {
+    this._statusbar.applyBackgroundColor();
     this.getUserId()
   }
 
