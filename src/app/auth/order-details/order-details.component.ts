@@ -56,7 +56,7 @@ export class OrderDetailsComponent  implements OnInit {
     this._orderServ.getSingleOrder(orderId).subscribe({
       next: (order: any) => {
         console.log('order', order);
-        this.orders = order[0];
+        this.orders = order;
      
       },
     });

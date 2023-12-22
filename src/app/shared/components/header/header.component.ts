@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnChanges() {
-    if (this.Heading == 'Dashboard' || this.Heading=='Chats' || this.Heading=='Profile' || this.Heading=='Reports' || this.Heading=='Products') {  
+    if (this.Heading == 'Dashboard' || this.Heading=='Chats' || this.Heading=='Profile' || this.Heading=='Reports' || this.Heading=='Products'|| this.Heading=='History') {  
       this.hideBackButton = true;
       console.log('status', this.hideBackButton);
     }
