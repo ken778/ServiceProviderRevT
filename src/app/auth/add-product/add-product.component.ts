@@ -115,8 +115,8 @@ export class AddProductComponent  implements OnInit {
  
         character:{
           price: this.productForm.get('bundlePrice')?.value,
-          quantity_added: this.productForm.get('itemQuantity')?.value,
-          quantity_available:this.productForm.get('itemQuantity')?.value,
+          quantity_added: Number(this.productForm.get('itemQuantity')?.value),
+          quantity_available:Number(this.productForm.get('itemQuantity')?.value),
           quantity_sold: 0,
           status: this.status,
           category: this.productForm.get('category')?.value,
