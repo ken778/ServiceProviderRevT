@@ -40,6 +40,7 @@
                padding-left: 1rem;
                padding-bottom: -5px !important;
                font-size: 0.8rem;
+               color: black !important;
            }
         }
    }
@@ -52,6 +53,9 @@
     .names{
         font-size: 0.7rem;
         padding-bottom: 0.4rem;
+        ion-text{
+          color: black !important;
+        }
     }
   }
   .inner-details {
@@ -61,6 +65,9 @@
     justify-content: space-between;
     // background-color: red;
     width: 100%;
+    ion-text{
+      color: black !important;
+    }
   
   }
   .order-details{
@@ -84,6 +91,7 @@
     .icon{
        margin-left: -10px;
         margin-top: 10px;
+        color: black !important;
     }
    
    
@@ -93,4 +101,17 @@
 //   .top-label {
 //     margin-bottom: 5px; /* Add spacing between the top label and the second label */
 //   }
+
+.tabs{
+   background-color: white;
+}
+.scrollable{
+  background-color: white;
+  ion-list{
+    --background: #D9D9D9;
+  }
+}
+::ng-deep .list-md{
+  --background: white;
+}
 }

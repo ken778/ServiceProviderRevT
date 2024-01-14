@@ -67,7 +67,7 @@
             <ion-item (click)="toOrder(item.id)" *ngFor="let item of filteredOrders$" class="order-details mx-auto mt-2" >
               <ion-item class="order-detail"   lines="none">
            
-                <div class="icon">
+                <div class="icon order-icon">
                   <ion-icon size="large" name="person-outline" slot="start"></ion-icon>
                 </div>
                 <div class="details">
@@ -75,7 +75,7 @@
                     <ion-text>{{item.customerName}}</ion-text>
                   </div>
                   <div class="inner-details">
-                    <ion-text>{{item.orderID}}</ion-text>
+                    <ion-text >{{item.orderID}}</ion-text>
                     <ion-text>{{item.province}}</ion-text>
                     <ion-text>R {{item.amount}}</ion-text>
                   </div>

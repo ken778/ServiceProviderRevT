@@ -57,7 +57,11 @@
           </ion-list>
           <hr />
           <div class="details-container">
-            <ion-badge color="success">{{orderObject[0].orderStatus}}</ion-badge>
+            <div class="bages">
+              <ion-badge color="success">{{orderObject[0].orderStatus}}</ion-badge>
+              <ion-badge slot="end" color="success">{{orderObject[0].paymentStatus}}</ion-badge>
+            </div>
+          
             <div class="details p-1">
               <div>
                 <ion-text class="text-muted fw-bold"> Date of order </ion-text>
