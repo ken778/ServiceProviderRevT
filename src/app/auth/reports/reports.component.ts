@@ -52,6 +52,7 @@ export class ReportsComponent implements OnInit {
   orderArray!: any;
   orderAvailable = false;
   totalNumberOfOrders!: number;
+  overallTotalAmount!:any;
 
   month!: any;
 
@@ -109,6 +110,57 @@ export class ReportsComponent implements OnInit {
     },
   ];
 
+  data2 = [
+    {
+      date: '1989-11-30',
+      quantity: 6,
+      oerderID: '57f61426-e45c-3357-aa92-650e99f861e7',
+      Status: false,
+      cost: 114132,
+      created_at: "Thu Dec 14 2023"
+    },
+    {
+      date: '1986-03-23',
+      quantity: 7,
+      oerderID: 'd94a5e6a-be0b-3a8d-a819-8fc69a585ce9',
+      Status: false,
+      cost: 68666102,
+      created_at: "Thu Dec 14 2023"
+    },
+    {
+      date: '2020-01-19',
+      quantity: 5,
+      oerderID: '177e20f2-202f-345b-b80c-68a69614112c',
+      Status: false,
+      cost: 1084577,
+      created_at: "Thu Jan 14 2023"
+    },
+    {
+      date: '2017-12-29',
+      quantity: 6,
+      oerderID: '2b2e30a0-96bb-37cf-bdf1-eb5f62fa079d',
+      Status: true,
+      cost: 19,
+      created_at: "Thu Jan 14 2023"
+    },
+    {
+      date: '1976-09-06',
+      quantity: 1,
+      oerderID: 'a1594878-2de6-3f09-b034-56b7a15156d4',
+      Status: true,
+      cost: 971298,
+      created_at: "Thu Jan 14 2023"
+    },
+    {
+      date: '1991-05-24',
+      quantity: 0,
+      oerderID: 'b4886a04-c1e5-37a6-b5ea-9b9544fd5e9d',
+      Status: false,
+      cost: 453966474,
+      created_at: "Thu Jan 14 2023"
+    },
+  ];
+
   ngOnInit() {
     console.log('report report')
     this.myForm = this.fb.group({
@@ -118,13 +170,31 @@ export class ReportsComponent implements OnInit {
       text: 'TEST',
     });
     this.loadLocalAssetsToBase64();
-
     this.data.map((res)=>{
      console.log(res.oerderID)
     })
 
     Filesystem.requestPermissions();
+ 
   }
+
+    //testing 
+    filterOrdersByMonth(orderArray: any[], targetMonth: string): any[] {
+      const filteredOrders = orderArray.filter((order: any) => {
+        // Check if created_at is a string before splitting
+        if (typeof order.created_at === 'string') {
+          const orderMonthString = order.created_at.split(' ')[1]; // Extract the month part
+          return orderMonthString === targetMonth;
+        }
+        return false; // If created_at is not a string, exclude from filtering
+      });
+  
+      return filteredOrders;
+    }
+  
+    filteredOrders: any[] = [];
+    
+  
 
       //get userId
       getUserId() {
@@ -133,6 +203,9 @@ export class ReportsComponent implements OnInit {
           this.userId = res?.uid;
           //calling get orders functions
           this.getOrdersMade();
+
+          // const targetMonth = 'Jan'; // Replace with your desired month
+          
         });
       }
     
@@ -146,12 +219,16 @@ export class ReportsComponent implements OnInit {
           );
           console.log(this.orderArray);
 
+
           //testing 
           console.log(this.orderArray[2].created_at.toLocaleString('en-US', { month: 'short' }))
           const date = new Date(this.orderArray[2].created_at);
           const monthString = date.toLocaleString('en-US', { month: 'short' });
-          
           console.log(monthString);
+
+          const filtredOrder = this.orderArray.filter((res:any)=>res.createdAt ==='Dec')
+
+          
           this.orderArray.sort((a:any, b:any) => this.orderArray.indexOf(b) - this.orderArray.indexOf(a));
           if (this.orderArray.length > 0) {
             this.orderAvailable = true;
@@ -211,7 +288,7 @@ export class ReportsComponent implements OnInit {
 
         {
           columns: [
-            { text: 'JANUARY REPORT', style: 'header', alignment: 'right',  margin: [0, 20, 0, 8] },
+            { text: `${this.month}`, style: 'header', alignment: 'right',  margin: [0, 20, 0, 8] },
           ],
         },
 
@@ -227,14 +304,17 @@ export class ReportsComponent implements OnInit {
                 { text: 'quantity', style: 'tableHeader' },
                 { text: 'OrderiD', style: 'tableHeader' },
                 { text: 'Status', style: 'tableHeader' },
+                { text: 'Province', style: 'tableHeader' },
                 { text: 'Cost', style: 'tableHeader' },
               ],
-              ...this.data.map((dataItem) => [
-                dataItem.date,
-                dataItem.quantity.toString(), // Convert to string if needed
-                dataItem.oerderID,
-                dataItem.Status,
-                "R" + dataItem.cost.toString()  // Convert to string if needed
+              ...this.filteredOrders.map((dataItem) => [
+                dataItem.created_at,
+                dataItem.postalCode.toString(), // Convert to string if needed
+                dataItem.orderID,
+                dataItem.orderStatus,
+                dataItem.delivery_address,
+                dataItem.province,
+                "R" + dataItem.amount.toString()  // Convert to string if needed
               ]),
             ],
           },
@@ -314,6 +394,19 @@ export class ReportsComponent implements OnInit {
     console.log(this.pdfObj);
   }
 
+   //accumulate total amount of cart items
+   accumulateTotalAmount() {
+    const overallTotal = this.filteredOrders.reduce(
+      (accumulator, currentItem) => {
+        return accumulator + Number(currentItem.amount);
+      },
+      0
+    );
+    this.overallTotalAmount = overallTotal.toFixed(2);
+    console.log("accumulated total amount", this.overallTotalAmount);
+    this.totalNumberOfOrders = this.filteredOrders.length
+  }
+
 
   //download
   downloadPdf() {
@@ -373,6 +466,11 @@ export class ReportsComponent implements OnInit {
     const monthString = date.toLocaleString('en-US', { month: 'short' });
     console.log(monthString);
     this.month = monthString;
+
+    this.filteredOrders = this.filterOrdersByMonth(this.orderArray, monthString);  
+          console.log(this.filteredOrders);
+
+          this.accumulateTotalAmount()
   }
 
   //filter orders based on month
