@@ -17,6 +17,7 @@ import { ProductService } from 'src/app/unAuth/services/product/product.service'
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 import { DropdownInputComponent } from 'src/app/shared/components/dropdown-input/dropdown-input.component';
 import { categories } from 'src/app/shared/product-objects/product-objects';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-add-product',
@@ -54,8 +55,9 @@ export class AddProductComponent  implements OnInit {
       category: new FormControl('', [Validators.required]),
     });
 
-    constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router) {
+    constructor( private _storageServ: ImageUploadService, private _productServ: ProductService,private _authServ: AuthServiceService, private _toast: ToastService, private router: Router, private _statusbar : StatusbarService) {
       this.getLoogedInUser()
+      this._statusbar.applyBackgroundColor();
     }
 
   ngOnInit() {}
@@ -113,8 +115,8 @@ export class AddProductComponent  implements OnInit {
  
         character:{
           price: this.productForm.get('bundlePrice')?.value,
-          quantity_added: this.productForm.get('itemQuantity')?.value,
-          quantity_available:this.productForm.get('itemQuantity')?.value,
+          quantity_added: Number(this.productForm.get('itemQuantity')?.value),
+          quantity_available:Number(this.productForm.get('itemQuantity')?.value),
           quantity_sold: 0,
           status: this.status,
           category: this.productForm.get('category')?.value,

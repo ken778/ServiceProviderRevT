@@ -37,8 +37,7 @@ export class ForgotPasswordComponent  implements OnInit {
   ngOnInit() {}
 
   resetPassword(){
- console.log(this.formGroup.get('email')?.value)
-  
+    console.log(this.formGroup.get('email')?.value)
      this._auth.forgotPassword(this.formGroup.get('email')?.value).then(()=>{
       this._toast.presentToast('Paasword reset link sent to your email', 'success');
      })

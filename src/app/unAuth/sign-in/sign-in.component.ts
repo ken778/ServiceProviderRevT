@@ -13,6 +13,7 @@ import { AuthServiceService } from '../services/auth/auth-service.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ToastService } from '../services/toast/toast.service';
+import { StatusbarService } from '../services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -43,8 +44,11 @@ export class SignInComponent implements OnInit {
   constructor(
     private _auth: AuthServiceService,
     private router: Router,
-    private _toast: ToastService
-  ) {}
+    private _toast: ToastService,
+    private _statusbar : StatusbarService
+  ) {
+    this._statusbar.applyBackgroundColor();
+  }
 
   ngOnInit() {}
 

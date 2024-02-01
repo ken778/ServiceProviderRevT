@@ -17,6 +17,7 @@ import {
 } from '@angular/fire/storage';
 import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-upload.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-profile',
@@ -50,8 +51,11 @@ export class ProfileComponent implements OnInit {
     private _auth: AuthServiceService,
     private storage: Storage,
     private _storageServ: ImageUploadService,
-    private  _toastService: ToastService
-  ) {}
+    private  _toastService: ToastService,
+    private _statusbar : StatusbarService
+  ) {
+    this._statusbar.applyBackgroundColor();
+  }
 
   ngOnInit() {
     // console.log(this.operatingHours.weekdaysStartTime)
@@ -226,5 +230,22 @@ export class ProfileComponent implements OnInit {
       console.log(error)
      })
   }
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      deleteAccount: () => {
+        this._toastService.presentToast( "Account deleted successfully", "success")
+      },
+    },
+  ];
+
   
 }

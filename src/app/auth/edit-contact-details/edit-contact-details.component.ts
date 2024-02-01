@@ -11,6 +11,7 @@ import { TextAreaComponent } from 'src/app/shared/components/text-area/text-area
 import { AuthServiceService } from 'src/app/unAuth/services/auth/auth-service.service';
 import { ImageUploadService } from 'src/app/unAuth/services/file-upload/image-upload.service';
 import { ProductService } from 'src/app/unAuth/services/product/product.service';
+import { StatusbarService } from 'src/app/unAuth/services/statusbar/statusbar.service';
 import { ToastService } from 'src/app/unAuth/services/toast/toast.service';
 
 @Component({
@@ -42,8 +43,9 @@ export class EditContactDetailsComponent  implements OnInit {
     'width': '200px',
   }
   
-  constructor(private _authServ: AuthServiceService, private _toast: ToastService, private _storageServ: ImageUploadService, private _productServ : ProductService) {
+  constructor(private _authServ: AuthServiceService, private _toast: ToastService, private _storageServ: ImageUploadService, private _productServ : ProductService, private _statusbar : StatusbarService) {
     this.getLoogedInUser()
+    this._statusbar.applyBackgroundColor();
    }
 
   formGroup = new FormGroup({

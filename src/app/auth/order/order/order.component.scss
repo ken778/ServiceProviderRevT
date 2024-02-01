@@ -131,7 +131,7 @@
               
         }
         padding: 1%;
-        border: 1px dashed #14934b;
+        // border: 1px dashed #14934b;
         width: 95% !important;
         margin-left: auto;
         margin-right: auto;
@@ -158,5 +158,10 @@
       }
       .cancelOrder-container{
        
+      }
+      .bages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
 }

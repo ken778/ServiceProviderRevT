@@ -13,7 +13,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
   imports: [IonicModule, HeaderComponent, RouterLink, NgFor, NgIf, CommonModule],
 })
 export class MessageComponent implements OnInit {
-  constructor(private _route: Router) {}
+  constructor(private _route: Router,) {}
 
   users = [
     {
